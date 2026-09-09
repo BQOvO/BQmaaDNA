@@ -1,5 +1,0 @@
-[
-    {"delay":1000,"action":"fly"},
-    {"delay":3000,"action":"fly"},
-    {"delay":3000,"action":"up","duration":1500}
-]

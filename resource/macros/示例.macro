@@ -1,0 +1,30 @@
+{
+    // ===== 示例：所有支持的 action =====
+
+    // fly - 点击飞行按钮（默认坐标 1107,360）
+    fly{wait(1000), repeat(3)};
+
+    // fly - 自定义坐标
+    fly{[1107, 360], wait(1000), repeat(3)};
+
+    // jump - 点击跳跃按钮（默认坐标 997,404）
+    jump{wait(1000), repeat(3)};
+
+    // click - 点击指定坐标
+    click{[970, 642], wait(1000), repeat(3)};
+
+    // longpress - 长按指定坐标，duration 为按住时长(ms)
+    longpress{[500, 500], duration(1000), wait(1000), repeat(3)};
+
+    // swipe - 从起点滑动到终点，duration 为滑动耗时(ms)
+    swipe{[100, 200], [300, 400], duration(200), wait(1000), repeat(3)};
+
+    // 摇杆移动 - 距离/时长写死在代码里，只暴露 wait 和 repeat
+    up{wait(1000), repeat(3)};
+    down{wait(1000), repeat(3)};
+    left{wait(1000), repeat(3)};
+    right{wait(1000), repeat(3)};
+
+    // 单独等待
+    wait{1000};
+}

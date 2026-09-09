@@ -1,0 +1,16 @@
+{
+    wait{2000};
+    fly{};
+    wait{2000};
+    fly{};
+    wait{2000};
+    fly{};
+    wait{2000};
+    fly{};
+    wait{2000};
+    fly{};
+    wait{2000};
+    fly{};
+    wait{2000};
+    fly{};
+}

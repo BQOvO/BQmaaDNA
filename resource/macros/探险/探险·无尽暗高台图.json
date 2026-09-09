@@ -1,5 +1,0 @@
-[
-    {"delay":1000,"action":"move_up","duration":7500},
-    {"delay":500,"action":"move_left","duration":3500},
-    {"delay":500,"action":"move_up","duration":1000}
-]
