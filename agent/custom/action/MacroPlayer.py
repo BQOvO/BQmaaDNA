@@ -1,7 +1,7 @@
 import json
 import os
+import re
 import time
-import sys
 import traceback
 from maa.context import Context
 from maa.custom_action import CustomAction
@@ -13,120 +13,142 @@ def resolve_macro_path(file_path: str) -> str:
     _project_root = os.getcwd()
     return os.path.join(_project_root, "resource", "macros", file_path)
 
-# ========== 请根据你的游戏修改以下默认值 ==========
-DEFAULT_JOYSTICK_CENTER_X = 205   # 摇杆中心 X 坐标（像素）
-DEFAULT_JOYSTICK_CENTER_Y = 535   # 摇杆中心 Y 坐标（像素）
-DEFAULT_MOVE_DISTANCE = 70        # 摇杆滑动距离（像素）
-DEFAULT_MOVE_DURATION = 50        # 摇杆滑动耗时（毫秒）
+
+# ========== 默认值（摇杆参数写死在这里） ==========
+DEFAULT_JOYSTICK_CENTER_X = 205
+DEFAULT_JOYSTICK_CENTER_Y = 535
+DEFAULT_MOVE_DISTANCE = 70
+DEFAULT_MOVE_DURATION = 50
+
+# fly / jump 默认坐标
+DEFAULT_FLY_X = 1107
+DEFAULT_FLY_Y = 360
+DEFAULT_JUMP_X = 997
+DEFAULT_JUMP_Y = 404
 # =================================================
+
+
+def _split_params(params_str: str) -> list:
+    """按逗号分割参数字符串，保留方括号内的逗号"""
+    result = []
+    depth = 0
+    current = []
+    for ch in params_str:
+        if ch == '[':
+            depth += 1
+            current.append(ch)
+        elif ch == ']':
+            depth -= 1
+            current.append(ch)
+        elif ch == ',' and depth == 0:
+            result.append(''.join(current))
+            current = []
+        else:
+            current.append(ch)
+    if current:
+        result.append(''.join(current))
+    return result
+
+
+def _parse_coord(coord_str: str) -> tuple:
+    """解析 [x,y] 为 (x, y)"""
+    nums = re.findall(r'-?\d+', coord_str)
+    return tuple(int(n) for n in nums)
+
+
+def parse_macro(text: str) -> list:
+    """解析 .macro 格式文本，返回 step 列表"""
+    text = re.sub(r'//.*', '', text)
+
+    pattern = r'(\w+)\{([^}]*)\};'
+    matches = re.findall(pattern, text)
+
+    steps = []
+    for action_name, params_str in matches:
+        step = {
+            'action': action_name,
+            'positional': [],
+            'wait': 0,
+            'repeat': 1,
+            'duration': 0,
+        }
+
+        params = _split_params(params_str)
+        for param in params:
+            param = param.strip()
+            if not param:
+                continue
+            if param.startswith('['):
+                step['positional'].append(_parse_coord(param))
+            elif param.startswith('wait('):
+                m = re.search(r'wait\((\d+)\)', param)
+                if m:
+                    step['wait'] = int(m.group(1))
+            elif param.startswith('repeat('):
+                m = re.search(r'repeat\((\d+)\)', param)
+                if m:
+                    step['repeat'] = int(m.group(1))
+            elif param.startswith('duration('):
+                m = re.search(r'duration\((\d+)\)', param)
+                if m:
+                    step['duration'] = int(m.group(1))
+            elif param.isdigit():
+                step['positional'].append(int(param))
+
+        steps.append(step)
+
+    return steps
+
 
 class MacroPlayer(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult:
         print("[MacroPlayer] run() 开始执行", flush=True)
         try:
             param_str = argv.custom_action_param
-            # 尝试解析为 JSON
             try:
                 param = json.loads(param_str)
             except json.JSONDecodeError:
-                # 如果解析失败，则整个字符串视为文件路径
                 param = param_str
-
-            steps = None
-            macro_file = None
-
-            if isinstance(param, str):
-                # 直接是文件路径
-                macro_file = param
-            elif isinstance(param, dict):
-                # 对象格式：优先取 steps，否则取 file
-                steps = param.get("steps")
-                macro_file = param.get("file")
-            else:
-                print("[MacroPlayer] 参数格式错误，应为文件路径字符串或对象", flush=True)
-                return CustomAction.RunResult(success=False)
-
-            # 获取宏定义
-            if steps is not None:
-                macro = {"steps": steps}
-            elif macro_file:
-                resolved_path = resolve_macro_path(macro_file)
-                print(f"[MacroPlayer] 从文件读取宏: {resolved_path}", flush=True)
-                with open(resolved_path, "r", encoding="utf-8") as f:
-                    macro = json.load(f)
-                    if isinstance(macro, list):
-                        macro = {"steps": macro}
-            else:
-                print("[MacroPlayer] 未指定 steps 或 file 参数", flush=True)
-                return CustomAction.RunResult(success=False)
 
             controller = context.tasker.controller
 
-            start_time = time.perf_counter()
-            abs_time = 0
+            # ---------- 情况1：纯字符串 = 文件路径 ----------
+            if isinstance(param, str):
+                resolved = resolve_macro_path(param)
+                print(f"[MacroPlayer] 从文件读取宏: {resolved}", flush=True)
+                with open(resolved, "r", encoding="utf-8") as f:
+                    content = f.read()
 
-            def execute_step(step):
-                nonlocal abs_time
-                delay = step.get("delay", 0)
-                abs_time += delay
-                target_time = start_time + abs_time / 1000.0
-                now = time.perf_counter()
-                if now < target_time:
-                    time.sleep(target_time - now)
-
-                action = step["action"]
-                if action == "click":
-                    x, y = step["x"], step["y"]
-                    repeat = step.get("repeat", 1)
-                    repeat_interval = step.get("repeat_interval", 0)
-                    for _ in range(repeat):
-                        controller.post_click(x, y).wait()
-                        if repeat_interval > 0:
-                            time.sleep(repeat_interval / 1000.0)
-                elif action == "fly":
-                    controller.post_click(1107, 360).wait()
-                elif action == "jump":
-                    controller.post_click(997, 404).wait()
-                elif action == "long_press":
-                    x, y = step["x"], step["y"]
-                    duration = step.get("duration", 1000)
-                    controller.post_swipe(x, y, x, y, duration).wait()
-                elif action == "swipe":
-                    x1, y1 = step["x1"], step["y1"]
-                    x2, y2 = step["x2"], step["y2"]
-                    move_dur = step.get("move_duration", 200)
-                    hold_dur = step.get("hold_duration", 0)
-                    controller.post_swipe(x1, y1, x2, y2, move_dur).wait()
-                    if hold_dur > 0:
-                        time.sleep(hold_dur / 1000.0)
-                elif action in ("up", "down", "left", "right", "move_up", "move_down", "move_left", "move_right"):
-                    center_x = step.get("center_x", DEFAULT_JOYSTICK_CENTER_X)
-                    center_y = step.get("center_y", DEFAULT_JOYSTICK_CENTER_Y)
-                    distance = step.get("distance", DEFAULT_MOVE_DISTANCE)
-                    duration = step.get("duration", DEFAULT_MOVE_DURATION)
-                    endhold = step.get("endhold", 0)
-                    if action in ("up", "move_up"):
-                        end_x, end_y = center_x, center_y - distance
-                    elif action in ("down", "move_down"):
-                        end_x, end_y = center_x, center_y + distance
-                    elif action in ("left", "move_left"):
-                        end_x, end_y = center_x - distance, center_y
-                    else:
-                        end_x, end_y = center_x + distance, center_y
-                    controller.post_swipe(center_x, center_y, end_x, end_y, duration, endhold).wait()
-                elif action == "wait":
-                    dur = step.get("duration", 0)
-                    time.sleep(dur / 1000.0)
-                elif action == "loop":
-                    count = step.get("count", 1)
-                    for _ in range(count):
-                        for sub_step in step.get("steps", []):
-                            execute_step(sub_step)
+                if param.endswith(".macro"):
+                    steps = parse_macro(content)
+                    self._execute_macro(steps, controller)
                 else:
-                    print(f"[MacroPlayer] 未知动作: {action}", flush=True)
+                    self._execute_json(content, controller)
 
-            for step in macro.get("steps", []):
-                execute_step(step)
+            # ---------- 情况2：dict = 内联或 {"file": "..."} ----------
+            elif isinstance(param, dict):
+                steps = param.get("steps")
+                macro_file = param.get("file")
+
+                if steps is not None:
+                    self._execute_json(json.dumps({"steps": steps}), controller)
+                elif macro_file:
+                    resolved = resolve_macro_path(macro_file)
+                    print(f"[MacroPlayer] 从文件读取宏: {resolved}", flush=True)
+                    with open(resolved, "r", encoding="utf-8") as f:
+                        content = f.read()
+
+                    if macro_file.endswith(".macro"):
+                        steps = parse_macro(content)
+                        self._execute_macro(steps, controller)
+                    else:
+                        self._execute_json(content, controller)
+                else:
+                    print("[MacroPlayer] 未指定 steps 或 file 参数", flush=True)
+                    return CustomAction.RunResult(success=False)
+            else:
+                print("[MacroPlayer] 参数格式错误", flush=True)
+                return CustomAction.RunResult(success=False)
 
             print("[MacroPlayer] 执行完成", flush=True)
             return CustomAction.RunResult(success=True)
@@ -136,63 +158,201 @@ class MacroPlayer(CustomAction):
             traceback.print_exc()
             return CustomAction.RunResult(success=False)
 
+    # ==================== .macro 格式执行 ====================
+
+    def _execute_macro(self, steps: list, controller) -> None:
+        for step in steps:
+            self._execute_new_step(step, controller)
+
+    def _execute_new_step(self, step: dict, controller) -> None:
+        action = step['action']
+        wait_after = step['wait']
+        repeat = step['repeat']
+        positional = step['positional']
+        duration = step['duration']
+
+        for _ in range(repeat):
+            if action == 'fly':
+                if positional:
+                    x, y = positional[0]
+                else:
+                    x, y = DEFAULT_FLY_X, DEFAULT_FLY_Y
+                controller.post_click(x, y).wait()
+
+            elif action == 'jump':
+                if positional:
+                    x, y = positional[0]
+                else:
+                    x, y = DEFAULT_JUMP_X, DEFAULT_JUMP_Y
+                controller.post_click(x, y).wait()
+
+            elif action == 'click':
+                x, y = positional[0]
+                controller.post_click(x, y).wait()
+
+            elif action == 'longpress':
+                x, y = positional[0]
+                controller.post_swipe(x, y, x, y, duration).wait()
+
+            elif action == 'swipe':
+                (x1, y1), (x2, y2) = positional[0], positional[1]
+                controller.post_swipe(x1, y1, x2, y2, duration).wait()
+
+            elif action in ('up', 'down', 'left', 'right'):
+                cx = DEFAULT_JOYSTICK_CENTER_X
+                cy = DEFAULT_JOYSTICK_CENTER_Y
+                dist = DEFAULT_MOVE_DISTANCE
+                dur = DEFAULT_MOVE_DURATION
+                if action == 'up':
+                    ex, ey = cx, cy - dist
+                elif action == 'down':
+                    ex, ey = cx, cy + dist
+                elif action == 'left':
+                    ex, ey = cx - dist, cy
+                else:
+                    ex, ey = cx + dist, cy
+                controller.post_swipe(cx, cy, ex, ey, dur).wait()
+
+            elif action == 'wait':
+                dur = positional[0] if positional else 0
+                time.sleep(dur / 1000.0)
+
+            else:
+                print(f"[MacroPlayer] 未知动作: {action}", flush=True)
+
+            if wait_after > 0:
+                time.sleep(wait_after / 1000.0)
+
+    # ==================== 旧 .json 格式兼容 ====================
+
+    def _execute_json(self, content: str, controller) -> None:
+        macro = json.loads(content)
+        if isinstance(macro, list):
+            macro = {"steps": macro}
+
+        start_time = time.perf_counter()
+        abs_time = 0
+
+        def execute_step(step):
+            nonlocal abs_time
+            delay = step.get("delay", 0)
+            abs_time += delay
+            target_time = start_time + abs_time / 1000.0
+            now = time.perf_counter()
+            if now < target_time:
+                time.sleep(target_time - now)
+
+            action = step["action"]
+            if action == "click":
+                x, y = step["x"], step["y"]
+                repeat = step.get("repeat", 1)
+                repeat_interval = step.get("repeat_interval", 0)
+                for _ in range(repeat):
+                    controller.post_click(x, y).wait()
+                    if repeat_interval > 0:
+                        time.sleep(repeat_interval / 1000.0)
+            elif action == "fly":
+                controller.post_click(DEFAULT_FLY_X, DEFAULT_FLY_Y).wait()
+            elif action == "jump":
+                controller.post_click(DEFAULT_JUMP_X, DEFAULT_JUMP_Y).wait()
+            elif action == "long_press":
+                x, y = step["x"], step["y"]
+                duration = step.get("duration", 1000)
+                controller.post_swipe(x, y, x, y, duration).wait()
+            elif action == "swipe":
+                x1, y1 = step["x1"], step["y1"]
+                x2, y2 = step["x2"], step["y2"]
+                move_dur = step.get("move_duration", 200)
+                hold_dur = step.get("hold_duration", 0)
+                controller.post_swipe(x1, y1, x2, y2, move_dur).wait()
+                if hold_dur > 0:
+                    time.sleep(hold_dur / 1000.0)
+            elif action in ("up", "down", "left", "right",
+                            "move_up", "move_down", "move_left", "move_right"):
+                center_x = step.get("center_x", DEFAULT_JOYSTICK_CENTER_X)
+                center_y = step.get("center_y", DEFAULT_JOYSTICK_CENTER_Y)
+                distance = step.get("distance", DEFAULT_MOVE_DISTANCE)
+                duration = step.get("duration", DEFAULT_MOVE_DURATION)
+                endhold = step.get("endhold", 0)
+                if action in ("up", "move_up"):
+                    end_x, end_y = center_x, center_y - distance
+                elif action in ("down", "move_down"):
+                    end_x, end_y = center_x, center_y + distance
+                elif action in ("left", "move_left"):
+                    end_x, end_y = center_x - distance, center_y
+                else:
+                    end_x, end_y = center_x + distance, center_y
+                controller.post_swipe(center_x, center_y, end_x, end_y, duration, endhold).wait()
+            elif action == "wait":
+                dur = step.get("duration", 0)
+                time.sleep(dur / 1000.0)
+            elif action == "loop":
+                count = step.get("count", 1)
+                for _ in range(count):
+                    for sub_step in step.get("steps", []):
+                        execute_step(sub_step)
+            else:
+                print(f"[MacroPlayer] 未知动作: {action}", flush=True)
+
+        for step in macro.get("steps", []):
+            execute_step(step)
+
 
 """
 ===== MacroPlayer 功能说明 =====
 
-宏播放器：执行预定义的宏操作序列，支持多种动作类型。
-可从 JSON 文件读取宏定义，也可直接在 pipeline 参数中传入 steps 数组。
+宏播放器：执行预定义的宏操作序列。
+支持两种格式：
+  1. 新格式 .macro —— 简洁的自定义语法，推荐使用
+  2. 旧格式 .json   —— 向后兼容
 
-===== 核心实现 =====
+===== 新格式 .macro 语法 =====
 
-1. 参数解析：支持三种格式 —— 文件路径字符串、{"file": "xxx.json"}、{"steps": [...]}。
-2. 文件路径解析：纯文件名自动补全为 resource/macros/ 目录下的路径。
-3. 时间轴执行：每个 step 有 delay(ms)，按绝对时间轴顺序执行，保证时序精确。
-4. 支持的动作类型见下方。
+文件后缀：.macro
+外层用 {} 包裹，每个动作用 ; 结束，支持 // 注释。
 
-===== 支持的动作类型 =====
+  action{参数1, 参数2, ...};
 
-click        - 点击指定坐标           {"action":"click","x":100,"y":200,"repeat":1,"repeat_interval":0}
-long_press   - 长按指定坐标           {"action":"long_press","x":100,"y":200,"duration":1000}
-swipe        - 滑动                   {"action":"swipe","x1":0,"y1":0,"x2":100,"y2":100,"move_duration":200,"hold_duration":0}
-fly          - 点击飞行(1107,360)      {"action":"fly"}
-jump         - 点击跳跃(997,404)       {"action":"jump"}
-up/down/left/right - 摇杆移动         {"action":"up","distance":70,"duration":50,"endhold":0}
-wait         - 等待                   {"action":"wait","duration":1000}
-loop         - 循环子步骤             {"action":"loop","count":3,"steps":[...]}
+参数类型：
+  [x,y]         坐标（位置参数）
+  wait(ms)      动作后等待（毫秒）
+  repeat(n)     重复次数
+  duration(ms)  持续时间（毫秒），用于 longpress 和 swipe
 
-===== 使用教程 =====
+支持的动作：
 
-用法1：从文件读取
-  custom_action_param: "夜航手册60.json"
-  自动从 resource/macros/夜航手册60.json 加载。
+  fly{wait(1000), repeat(3)}
+  fly{[1107, 360], wait(1000), repeat(3)}   // 自定义坐标
 
-用法2：内联 steps
-  custom_action_param: {
-      "steps": [
-          {"delay":0,"action":"click","x":500,"y":300},
-          {"delay":1000,"action":"swipe","x1":0,"y1":0,"x2":100,"y2":0}
-      ]
-  }
+  jump{wait(1000), repeat(3)}
+  jump{[997, 404], wait(1000), repeat(3)}   // 自定义坐标
 
-用法3：指定文件路径
-  custom_action_param: {"file": "夜航手册60.json"}
+  click{[x, y], wait(1000), repeat(3)}
 
-===== Pipeline JSON 示例 =====
+  longpress{[x, y], duration(1000), wait(1000), repeat(3)}
+
+  swipe{[x1, y1], [x2, y2], duration(200), wait(1000), repeat(3)}
+
+  up{wait(1000), repeat(3)}
+  down{wait(1000), repeat(3)}
+  left{wait(1000), repeat(3)}
+  right{wait(1000), repeat(3)}
+
+  wait{1000}                                // 单独等待
+
+===== 旧格式 .json 兼容 =====
+
+仍支持原有的 JSON 格式，包括 delay / steps / file 等字段。
+旧格式中的 long_press、move_up/down/left/right 别名继续有效。
+
+===== Pipeline 用法 =====
 
 {
     "执行宏": {
         "recognition": "DirectHit",
         "action": "Custom",
         "custom_action": "MacroPlayer",
-        "custom_action_param": "夜航手册60.json"
+        "custom_action_param": "夜航手册60/夜航手册60.macro"
     }
 }
-
-===== 类常量配置 =====
-
-DEFAULT_JOYSTICK_CENTER_X = 205    // 摇杆中心 X
-DEFAULT_JOYSTICK_CENTER_Y = 535    // 摇杆中心 Y
-DEFAULT_MOVE_DISTANCE     = 70     // 摇杆滑动距离（像素）
-DEFAULT_MOVE_DURATION     = 50     // 摇杆滑动耗时（毫秒）
 """
