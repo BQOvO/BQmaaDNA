@@ -130,7 +130,7 @@
       "param": {
         "custom_action": "MacroPlayer",
         "custom_action_param": {
-          "file": "角色经验/角色经验·避险.json"
+          "file": "角色经验/角色经验·避险.macro"
         }
       }
     },

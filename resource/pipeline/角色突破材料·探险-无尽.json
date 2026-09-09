@@ -23,7 +23,7 @@
             "type": "Custom",
             "param": {
                 "custom_action_param": {
-                    "file": "角色突破·探险.json"
+                    "file": "角色突破·探险.macro"
                 },
                 "custom_action": "MacroPlayer"
             }
@@ -266,7 +266,7 @@
             "type": "Custom",
             "param": {
                 "custom_action_param": {
-                    "file": "角色突破·探险.json"
+                    "file": "角色突破·探险.macro"
                 },
                 "custom_action": "MacroPlayer"
             }

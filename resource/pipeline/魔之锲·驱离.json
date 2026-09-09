@@ -90,7 +90,7 @@
       "action": "Custom",
       "custom_action": "MacroPlayer",
       "custom_action_param": {
-        "file": "魔之锲/魔之锲·驱离.json"
+        "file": "魔之锲/魔之锲·驱离.macro"
       },
       "post_delay": 0,
       "focus": {

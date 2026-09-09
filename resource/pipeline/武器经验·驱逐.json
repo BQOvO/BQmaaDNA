@@ -152,7 +152,7 @@
             "type": "Custom",
             "param": {
                 "custom_action_param": {
-                    "file": "武器经验/武器经验·驱逐.json"
+                    "file": "武器经验/武器经验·驱逐.macro"
                 },
                 "custom_action": "MacroPlayer"
             }
