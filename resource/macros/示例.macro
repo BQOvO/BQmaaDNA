@@ -1,25 +1,37 @@
 {
     // ===== 示例：所有支持的 action =====
 
-    // fly - 点击飞行按钮（默认坐标 1107,360）
+    // fly - 默认坐标 (1107,360)，无范围
     fly{wait(1000), repeat(3)};
 
-    // fly - 自定义坐标
+    // fly - 精确坐标 [x,y]
     fly{[1107, 360], wait(1000), repeat(3)};
 
-    // jump - 点击跳跃按钮（默认坐标 997,404）
+    // fly - 范围坐标 [x1,y1,x2,y2]，每次点击在矩形内随机，越靠近中心概率越高
+    fly{[1100, 355, 1114, 365], wait(1000), repeat(3)};
+
+    // jump - 默认坐标 (997,404)
     jump{wait(1000), repeat(3)};
 
-    // click - 点击指定坐标
+    // click - 精确坐标
     click{[970, 642], wait(1000), repeat(3)};
 
-    // longpress - 长按指定坐标，duration 为按住时长(ms)
+    // click - 范围坐标，在矩形内随机落点
+    click{[965, 637, 975, 647], wait(1000), repeat(3)};
+
+    // longpress - 精确坐标，duration 为按住时长(ms)
     longpress{[500, 500], duration(1000), wait(1000), repeat(3)};
 
-    // swipe - 从起点滑动到终点，duration 为滑动耗时(ms)
+    // longpress - 范围坐标
+    longpress{[495, 495, 505, 505], duration(1000), wait(1000), repeat(3)};
+
+    // swipe - 精确坐标，duration 为滑动耗时(ms)
     swipe{[100, 200], [300, 400], duration(200), wait(1000), repeat(3)};
 
-    // 摇杆移动 - 距离/时长写死在代码里，只暴露 wait 和 repeat
+    // swipe - 两端都用范围坐标，每次起点/终点都随机
+    swipe{[95, 195, 105, 205], [295, 395, 305, 405], duration(200), wait(1000), repeat(3)};
+
+    // 摇杆移动 - 距离/时长写死在代码里
     up{wait(1000), repeat(3)};
     down{wait(1000), repeat(3)};
     left{wait(1000), repeat(3)};

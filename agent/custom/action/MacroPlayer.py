@@ -1,5 +1,6 @@
 import json
 import os
+import random
 import re
 import time
 import traceback
@@ -26,6 +27,21 @@ DEFAULT_FLY_Y = 360
 DEFAULT_JUMP_X = 997
 DEFAULT_JUMP_Y = 404
 # =================================================
+
+
+def _get_click_pos(coord: tuple) -> tuple:
+    """根据坐标参数返回实际点击位置。
+    - (x, y) 精确坐标，直接返回
+    - (x1, y1, x2, y2) 矩形范围，用 Beta(2,2) 分布随机取点，越靠近中心概率越高
+    """
+    if len(coord) == 2:
+        return coord
+    x1, y1, x2, y2 = coord
+    min_x, max_x = min(x1, x2), max(x1, x2)
+    min_y, max_y = min(y1, y2), max(y1, y2)
+    rx = min_x + (max_x - min_x) * random.betavariate(2, 2)
+    ry = min_y + (max_y - min_y) * random.betavariate(2, 2)
+    return int(rx), int(ry)
 
 
 def _split_params(params_str: str) -> list:
@@ -174,28 +190,28 @@ class MacroPlayer(CustomAction):
         for _ in range(repeat):
             if action == 'fly':
                 if positional:
-                    x, y = positional[0]
+                    x, y = _get_click_pos(positional[0])
                 else:
                     x, y = DEFAULT_FLY_X, DEFAULT_FLY_Y
                 controller.post_click(x, y).wait()
 
             elif action == 'jump':
                 if positional:
-                    x, y = positional[0]
+                    x, y = _get_click_pos(positional[0])
                 else:
                     x, y = DEFAULT_JUMP_X, DEFAULT_JUMP_Y
                 controller.post_click(x, y).wait()
 
             elif action == 'click':
-                x, y = positional[0]
+                x, y = _get_click_pos(positional[0])
                 controller.post_click(x, y).wait()
 
             elif action == 'longpress':
-                x, y = positional[0]
+                x, y = _get_click_pos(positional[0])
                 controller.post_swipe(x, y, x, y, duration).wait()
 
             elif action == 'swipe':
-                (x1, y1), (x2, y2) = positional[0], positional[1]
+                (x1, y1), (x2, y2) = _get_click_pos(positional[0]), _get_click_pos(positional[1])
                 controller.post_swipe(x1, y1, x2, y2, duration).wait()
 
             elif action in ('up', 'down', 'left', 'right'):
