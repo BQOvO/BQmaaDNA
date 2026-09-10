@@ -7,11 +7,13 @@ from maa.custom_action import CustomAction
 
 
 class NumberComparator(CustomAction):
-    ROI = [1030,428,86,28]
+    ROI = [933,407,81,24]
     BTN_DECREASE = [965, 475]
     BTN_INCREASE = [1180, 475]
+    CLICK_WHEN_ONE = [1206,384]
     CLICK_OPEN = [1200, 480]
     MAX_RETRIES = 100
+    ENABLE_ADJUST = False
 
     def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult:
         try:
@@ -21,12 +23,25 @@ class NumberComparator(CustomAction):
             return CustomAction.RunResult(success=False)
 
         target = int(param.get("target", 1))
+        enable_adjust = param.get("enable_adjust", self.ENABLE_ADJUST)
 
         image = self._screencap(context)
         if image is None:
             return CustomAction.RunResult(success=False)
 
         has_text = self._ocr_hit(context, image, self.ROI, "\\d+/\\d+")
+
+        if target == 1:
+            if has_text:
+                self._click(context, self.CLICK_WHEN_ONE, "target=1, 检测到文字, 点击取消自动轮次")
+                return CustomAction.RunResult(success=True)
+            else:
+                print("[NumberComparator] target=1, 未检测到文字, 跳过点击, 继续执行 next")
+                return CustomAction.RunResult(success=True)
+
+        if not enable_adjust:
+            print(f"[NumberComparator] ENABLE_ADJUST=False, 仅 target=1 生效, 当前 target={target}, 跳过调整")
+            return CustomAction.RunResult(success=True)
 
         if not has_text:
             self._click(context, self.CLICK_OPEN, "未检测到轮次文字, 点击开启自动轮次")
@@ -48,14 +63,14 @@ class NumberComparator(CustomAction):
                 print(f"[NumberComparator] 第{attempt}次 OCR 未能识别数字, 继续重试")
                 continue
 
-            print(f"[NumberComparator] 第{attempt}次 识别={recognized}, 目标={target}, 比较: {recognized} vs {target}")
-            if recognized == target:
-                print(f"[NumberComparator] {recognized} == {target}, 成功!")
+            print(f"[NumberComparator] 第{attempt}次 识别={recognized}, 目标={target-1}, 比较: {recognized}+1 vs {target}")
+            if recognized + 1 == target:
+                print(f"[NumberComparator] {recognized}+1 == {target}, 成功!")
                 return CustomAction.RunResult(success=True)
-            elif recognized > target:
-                self._click(context, self.BTN_DECREASE, f"{recognized} > {target}, 点击调小")
+            elif recognized + 1 > target:
+                self._click(context, self.BTN_DECREASE, f"{recognized}+1 > {target}, 点击调小")
             else:
-                self._click(context, self.BTN_INCREASE, f"{recognized} < {target}, 点击调大")
+                self._click(context, self.BTN_INCREASE, f"{recognized}+1 < {target}, 点击调大")
 
         print(f"[NumberComparator] 已达最大重试次数 {self.MAX_RETRIES}, 返回失败")
         return CustomAction.RunResult(success=False)
