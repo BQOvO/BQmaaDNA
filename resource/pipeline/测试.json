@@ -1,4 +1,121 @@
 {
+    "TouchTest": {
+        "recognition": {
+            "type": "DirectHit"
+        },
+        "action": {
+            "type": "Custom",
+            "custom_action": "TouchTest",
+            "custom_action_param": {
+                "duration": 10,
+                "joystick_cx": 205,
+                "joystick_cy": 535
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "👆 触摸测试开始！10秒内触摸屏幕"
+        },
+        "next": [
+            "TouchTest-完成"
+        ]
+    },
+    "TouchTest-完成": {
+        "focus": {
+            "Node.Recognition.Succeeded": "✅ 触摸测试结束"
+        }
+    },
+    "MacroRecorder测试": {
+        "recognition": {
+            "type": "DirectHit"
+        },
+        "action": {
+            "type": "Custom",
+            "custom_action": "MacroRecorderStart",
+            "custom_action_param": {
+                "idle_timeout": 0,
+                "max_duration": 600.0,
+                "output_file": "测试录制.macro"
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "🎮 WASD 录制测试！推摇杆走副本，按 ESC 停止"
+        },
+        "next": [
+            "MacroRecorder测试-完成"
+        ]
+    },
+    "MacroRecorder测试-完成": {
+        "focus": {
+            "Node.Recognition.Succeeded": "✅ 录制完成，查看终端输出"
+        }
+    },
+    "MacroPlayer测试": {
+        "recognition": {
+            "type": "DirectHit"
+        },
+        "action": {
+            "type": "Custom",
+            "custom_action": "MacroPlayer",
+            "custom_action_param": "测试录制.macro"
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "▶ 回放录制好的宏，角色自动寻路..."
+        },
+        "next": [
+            "MacroPlayer测试-完成"
+        ]
+    },
+    "MacroPlayer测试-完成": {
+        "focus": {
+            "Node.Recognition.Succeeded": "✅ 回放完成"
+        }
+    },
+    "寻路录制": {
+        "recognition": {
+            "type": "DirectHit"
+        },
+        "action": {
+            "type": "Custom",
+            "custom_action": "MacroRecorderStart",
+            "custom_action_param": {
+                "idle_timeout": 0,
+                "max_duration": 600.0,
+                "output_file": "寻路录制.macro"
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "🎮 寻路录制开始！WASD 推摇杆走副本，按 ESC 停止"
+        },
+        "next": [
+            "寻路录制-完成"
+        ]
+    },
+    "寻路录制-完成": {
+        "focus": {
+            "Node.Recognition.Succeeded": "✅ 寻路录制完成，宏已保存"
+        }
+    },
+    "寻路测试": {
+        "recognition": {
+            "type": "DirectHit"
+        },
+        "action": {
+            "type": "Custom",
+            "custom_action": "MacroPlayer",
+            "custom_action_param": "寻路录制.macro"
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "▶ 寻路回放中，角色自动寻路..."
+        },
+        "next": [
+            "寻路测试-完成"
+        ]
+    },
+    "寻路测试-完成": {
+        "focus": {
+            "Node.Recognition.Succeeded": "✅ 寻路回放完成"
+        }
+    },
     "RoundTracker测试-启动": {
         "recognition": {
             "type": "DirectHit"
