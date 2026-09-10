@@ -35,6 +35,11 @@
               "next": [
                 "夜航65-轮次+1"
               ]
+            },
+            "夜航65-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册65.macro"
+              }
             }
           },
           "option": [
@@ -56,6 +61,11 @@
               "next": [
                 "夜航65-轮次+1"
               ]
+            },
+            "夜航65-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册65.macro"
+              }
             }
           },
           "option": [
@@ -77,6 +87,11 @@
               "next": [
                 "夜航65-轮次+1"
               ]
+            },
+            "夜航65-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册65.macro"
+              }
             }
           },
           "option": [
@@ -98,6 +113,11 @@
               "next": [
                 "夜航65-轮次+1"
               ]
+            },
+            "夜航65-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册65.macro"
+              }
             }
           },
           "option": [
@@ -119,6 +139,11 @@
               "next": [
                 "夜航65-轮次+1"
               ]
+            },
+            "夜航65-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册65.macro"
+              }
             }
           },
           "option": [
@@ -140,6 +165,11 @@
               "next": [
                 "夜航65-轮次+1"
               ]
+            },
+            "夜航65-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册65.macro"
+              }
             }
           },
           "option": [
@@ -161,6 +191,11 @@
               "next": [
                 "夜航65-轮次+1"
               ]
+            },
+            "夜航65-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册65.macro"
+              }
             }
           },
           "option": [
@@ -182,6 +217,11 @@
               "next": [
                 "夜航65-轮次+1"
               ]
+            },
+            "夜航65-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册65.macro"
+              }
             }
           },
           "option": [
@@ -203,6 +243,11 @@
               "next": [
                 "夜航65-轮次+1"
               ]
+            },
+            "夜航65-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册65.macro"
+              }
             }
           },
           "option": [
@@ -224,6 +269,11 @@
               "next": [
                 "夜航65-轮次+1"
               ]
+            },
+            "夜航65-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册65.macro"
+              }
             }
           },
           "option": [

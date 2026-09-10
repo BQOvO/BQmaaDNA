@@ -35,6 +35,11 @@
               "next": [
                 "夜航70-成功+1"
               ]
+            },
+            "夜航70-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册70.macro"
+              }
             }
           }
         },
@@ -53,6 +58,11 @@
               "next": [
                 "夜航70-成功+1"
               ]
+            },
+            "夜航70-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册70.macro"
+              }
             }
           }
         },
@@ -71,6 +81,11 @@
               "next": [
                 "夜航70-轮次+1"
               ]
+            },
+            "夜航70-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册70.macro"
+              }
             }
           },
           "option": [
@@ -92,6 +107,11 @@
               "next": [
                 "夜航70-轮次+1"
               ]
+            },
+            "夜航70-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册70.macro"
+              }
             }
           },
           "option": [
@@ -113,6 +133,11 @@
               "next": [
                 "夜航70-轮次+1"
               ]
+            },
+            "夜航70-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册70.macro"
+              }
             }
           },
           "option": [
@@ -134,6 +159,11 @@
               "next": [
                 "夜航70-轮次+1"
               ]
+            },
+            "夜航70-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册70.macro"
+              }
             }
           },
           "option": [
@@ -155,6 +185,11 @@
               "next": [
                 "夜航70-轮次+1"
               ]
+            },
+            "夜航70-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册70.macro"
+              }
             }
           },
           "option": [
@@ -176,6 +211,11 @@
               "next": [
                 "夜航70-轮次+1"
               ]
+            },
+            "夜航70-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册70.macro"
+              }
             }
           },
           "option": [
@@ -197,6 +237,11 @@
               "next": [
                 "夜航70-成功+1"
               ]
+            },
+            "夜航70-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册70.macro"
+              }
             }
           }
         },
@@ -215,6 +260,11 @@
               "next": [
                 "夜航70-成功+1"
               ]
+            },
+            "夜航70-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册70.macro"
+              }
             }
           }
         },
@@ -233,6 +283,11 @@
               "next": [
                 "夜航70-成功+1"
               ]
+            },
+            "夜航70-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册70.macro"
+              }
             }
           }
         },
@@ -251,6 +306,11 @@
               "next": [
                 "夜航70-成功+1"
               ]
+            },
+            "夜航70-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册70.macro"
+              }
             }
           }
         },
@@ -269,6 +329,11 @@
               "next": [
                 "夜航70-成功+1"
               ]
+            },
+            "夜航70-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册70.macro"
+              }
             }
           }
         },
@@ -287,6 +352,11 @@
               "next": [
                 "夜航70-成功+1"
               ]
+            },
+            "夜航70-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册70.macro"
+              }
             }
           }
         },
@@ -305,6 +375,11 @@
               "next": [
                 "夜航70-成功+1"
               ]
+            },
+            "夜航70-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册70.macro"
+              }
             }
           }
         },
@@ -323,6 +398,11 @@
               "next": [
                 "夜航70-成功+1"
               ]
+            },
+            "夜航70-寻路": {
+              "custom_action_param": {
+                "file": "夜航手册70.macro"
+              }
             }
           }
         }
