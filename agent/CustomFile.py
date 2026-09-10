@@ -1,6 +1,7 @@
 from maa.agent.agent_server import AgentServer
 from agent.custom.action.MacroPlayer import MacroPlayer
-from agent.custom.action.Count import Count, CountReset, CountPrint, CountCleanup
+from agent.custom.action.MacroRecorder import MacroRecorderStart, MacroRecorderStop
+from agent.custom.action.Count import Count, CountReset, CountPrint, CountCleanup, CountAdd, CountCheck, CountSet
 from agent.custom.action.Looper import Looper
 from agent.custom.action.randomr import randomr
 from agent.custom.action.FishFight import FishFight
@@ -34,7 +35,13 @@ _register("Count", Count, AgentServer.custom_action)
 _register("CountReset", CountReset, AgentServer.custom_action)
 _register("CountPrint", CountPrint, AgentServer.custom_action)
 _register("CountCleanup", CountCleanup, AgentServer.custom_action)
+_register("CountAdd", CountAdd, AgentServer.custom_action)
+_register("CountCheck", CountCheck, AgentServer.custom_action)
+_register("CountSet", CountSet, AgentServer.custom_action)
 _register("MacroPlayer", MacroPlayer, AgentServer.custom_action)
+
+_register("MacroRecorderStart", MacroRecorderStart, AgentServer.custom_action)
+_register("MacroRecorderStop", MacroRecorderStop, AgentServer.custom_action)
 _register("Looper", Looper, AgentServer.custom_action)
 _register("randomr", randomr, AgentServer.custom_action)
 _register("FishFight", FishFight, AgentServer.custom_action)
