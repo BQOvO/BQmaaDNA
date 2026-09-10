@@ -7,18 +7,15 @@
         ]
     },
     "name": "MDNA",
-    "title":"",
+    "title": "",
     "description": "使用前请将模拟器分辨率设置为16：9哦~~",
     "icon": "./resource/image/logo.ico",
     "contact": "QQ群:1002051753",
     "license": "MIT",
     "welcome": "首次使用！欢迎使用 MDNA!",
     "github": "https://github.com/BQOvO/MDNA",
-
     //"mirrorchyan_rid": "MaaXXX",
     //"mirrorchyan_multiplatform": true,
-    
-    
     "controller": [
         {
             "name": "模拟器",
@@ -57,7 +54,8 @@
         "tasks/preset/一键-备忘手记.json",
         "tasks/preset/夜航手册.json",
         "tasks/preset/历练-委托.json",
-        "tasks/测试.json"
+        "tasks/测试.json",
+        "tasks/寻路系统.json"
     ],
     "task": [],
     "option": {}

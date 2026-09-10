@@ -19,14 +19,26 @@ def resolve_macro_path(file_path: str) -> str:
 DEFAULT_JOYSTICK_CENTER_X = 205
 DEFAULT_JOYSTICK_CENTER_Y = 535
 DEFAULT_MOVE_DISTANCE = 70
-DEFAULT_MOVE_DURATION = 50
+DEFAULT_MOVE_DURATION = 100
 
 # fly / jump 默认坐标
 DEFAULT_FLY_X = 1107
 DEFAULT_FLY_Y = 360
 DEFAULT_JUMP_X = 997
 DEFAULT_JUMP_Y = 404
-# =================================================
+
+# ======== 8方向摇杆偏移 ========
+DIRECTION_OFFSETS = {
+    'up': (0, -1),
+    'down': (0, 1),
+    'left': (-1, 0),
+    'right': (1, 0),
+    'up_right': (0.707, -0.707),
+    'up_left': (-0.707, -0.707),
+    'down_right': (0.707, 0.707),
+    'down_left': (-0.707, 0.707),
+}
+# =================================
 
 
 def _get_click_pos(coord: tuple) -> tuple:
@@ -87,6 +99,7 @@ def parse_macro(text: str) -> list:
             'wait': 0,
             'repeat': 1,
             'duration': 0,
+            'end_hold': 0,
         }
 
         params = _split_params(params_str)
@@ -108,6 +121,10 @@ def parse_macro(text: str) -> list:
                 m = re.search(r'duration\((\d+)\)', param)
                 if m:
                     step['duration'] = int(m.group(1))
+            elif param.startswith('end_hold('):
+                m = re.search(r'end_hold\((\d+)\)', param)
+                if m:
+                    step['end_hold'] = int(m.group(1))
             elif param.isdigit():
                 step['positional'].append(int(param))
 
@@ -186,6 +203,9 @@ class MacroPlayer(CustomAction):
         repeat = step['repeat']
         positional = step['positional']
         duration = step['duration']
+        end_hold = step.get('end_hold', 0)
+
+        print(f"[MacroPlayer] 执行: {action} end_hold={end_hold}ms wait={wait_after}ms repeat={repeat}", flush=True)
 
         for _ in range(repeat):
             if action == 'fly':
@@ -214,20 +234,23 @@ class MacroPlayer(CustomAction):
                 (x1, y1), (x2, y2) = _get_click_pos(positional[0]), _get_click_pos(positional[1])
                 controller.post_swipe(x1, y1, x2, y2, duration).wait()
 
-            elif action in ('up', 'down', 'left', 'right'):
-                cx = DEFAULT_JOYSTICK_CENTER_X
-                cy = DEFAULT_JOYSTICK_CENTER_Y
-                dist = DEFAULT_MOVE_DISTANCE
-                dur = DEFAULT_MOVE_DURATION
-                if action == 'up':
-                    ex, ey = cx, cy - dist
-                elif action == 'down':
-                    ex, ey = cx, cy + dist
-                elif action == 'left':
-                    ex, ey = cx - dist, cy
-                else:
-                    ex, ey = cx + dist, cy
-                controller.post_swipe(cx, cy, ex, ey, dur).wait()
+            elif action in ('up', 'down', 'left', 'right',
+                            'up_right', 'up_left', 'down_right', 'down_left'):
+                # 直接通过触摸事件控制虚拟摇杆（不依赖键盘映射）
+                # touch_down(中心) → touch_move(目标方向) → sleep(hold) → touch_up
+                cx, cy = DEFAULT_JOYSTICK_CENTER_X, DEFAULT_JOYSTICK_CENTER_Y
+                move_dist = DEFAULT_MOVE_DISTANCE
+                dx, dy = DIRECTION_OFFSETS[action]
+                ex = int(cx + dx * move_dist)
+                ey = int(cy + dy * move_dist)
+                hold_ms = end_hold if end_hold > 0 else 100
+
+                print(f"[MacroPlayer]   🎮 摇杆: ({cx},{cy})→({ex},{ey}) hold={hold_ms}ms", flush=True)
+
+                controller.post_touch_down(cx, cy).wait()
+                controller.post_touch_move(ex, ey).wait()
+                time.sleep(hold_ms / 1000.0)
+                controller.post_touch_up().wait()
 
             elif action == 'wait':
                 dur = positional[0] if positional else 0
@@ -284,7 +307,8 @@ class MacroPlayer(CustomAction):
                 if hold_dur > 0:
                     time.sleep(hold_dur / 1000.0)
             elif action in ("up", "down", "left", "right",
-                            "move_up", "move_down", "move_left", "move_right"):
+                            "move_up", "move_down", "move_left", "move_right",
+                            "up_right", "up_left", "down_right", "down_left"):
                 center_x = step.get("center_x", DEFAULT_JOYSTICK_CENTER_X)
                 center_y = step.get("center_y", DEFAULT_JOYSTICK_CENTER_Y)
                 distance = step.get("distance", DEFAULT_MOVE_DISTANCE)
@@ -296,6 +320,16 @@ class MacroPlayer(CustomAction):
                     end_x, end_y = center_x, center_y + distance
                 elif action in ("left", "move_left"):
                     end_x, end_y = center_x - distance, center_y
+                elif action == "right":
+                    end_x, end_y = center_x + distance, center_y
+                elif action == "up_right":
+                    end_x, end_y = center_x + int(distance * 0.707), center_y - int(distance * 0.707)
+                elif action == "up_left":
+                    end_x, end_y = center_x - int(distance * 0.707), center_y - int(distance * 0.707)
+                elif action == "down_right":
+                    end_x, end_y = center_x + int(distance * 0.707), center_y + int(distance * 0.707)
+                elif action == "down_left":
+                    end_x, end_y = center_x - int(distance * 0.707), center_y + int(distance * 0.707)
                 else:
                     end_x, end_y = center_x + distance, center_y
                 controller.post_swipe(center_x, center_y, end_x, end_y, duration, endhold).wait()
