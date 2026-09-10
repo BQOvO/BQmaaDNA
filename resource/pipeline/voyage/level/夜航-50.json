@@ -1,0 +1,186 @@
+{
+    "夜航-50-1": {
+        "recognition": "OCR",
+        "expected": [
+            "舍身野蜂密探"
+        ],
+        "replace": [
+            [
+                "\\s+",
+                ""
+            ]
+        ],
+        "pre_delay": 0,
+        "action": "Custom",
+        "custom_action": "VoyageClick",
+        "post_delay": 0
+    },
+    "夜航-50-2": {
+        "recognition": "OCR",
+        "expected": [
+            "霹雳野蜂利刃"
+        ],
+        "replace": [
+            [
+                "\\s+",
+                ""
+            ]
+        ],
+        "pre_delay": 0,
+        "action": "Custom",
+        "custom_action": "VoyageClick",
+        "post_delay": 0
+    },
+    "夜航-50-3": {
+        "recognition": "OCR",
+        "expected": [
+            "转雷野蜂暗探"
+        ],
+        "replace": [
+            [
+                "\\s+",
+                ""
+            ]
+        ],
+        "pre_delay": 0,
+        "action": "Custom",
+        "custom_action": "VoyageClick",
+        "post_delay": 0
+    },
+    "夜航-50-4": {
+        "recognition": "OCR",
+        "expected": [
+            "守护游击秽兽"
+        ],
+        "replace": [
+            [
+                "\\s+",
+                ""
+            ]
+        ],
+        "pre_delay": 0,
+        "action": "Custom",
+        "custom_action": "VoyageClick",
+        "post_delay": 0
+    },
+    "夜航-50-5": {
+        "action": "Swipe",
+        "begin": [
+            525,
+            470
+        ],
+        "end": [
+            [
+                525,
+                120
+            ]
+        ],
+        "duration": [
+            3000
+        ],
+        "post_delay": 1000,
+        "timeout": 1000,
+        "next": [
+            "夜航-50-5-2"
+        ],
+        "on_error": [
+            "夜航-50-5"
+        ]
+    },
+    "夜航-50-5-2": {
+        "recognition": "OCR",
+        "expected": [
+            "猩红飘浮秽兽Ⅱ"
+        ],
+        "replace": [
+            [
+                "\\s+",
+                ""
+            ]
+        ],
+        "pre_delay": 0,
+        "action": "Custom",
+        "custom_action": "VoyageClick",
+        "post_delay": 0
+    },
+    "夜航-50-6": {
+        "action": "Swipe",
+        "begin": [
+            525,
+            470
+        ],
+        "end": [
+            [
+                525,
+                120
+            ]
+        ],
+        "duration": [
+            3000
+        ],
+        "post_delay": 1000,
+        "timeout": 1000,
+        "next": [
+            "夜航-50-6-2"
+        ],
+        "on_error": [
+            "夜航-50-6"
+        ]
+    },
+    "夜航-50-6-2": {
+        "recognition": "OCR",
+        "expected": [
+            "枯萎灼心秽兽"
+        ],
+        "replace": [
+            [
+                "\\s+",
+                ""
+            ]
+        ],
+        "pre_delay": 0,
+        "action": "Custom",
+        "custom_action": "VoyageClick",
+        "post_delay": 0
+    },
+    "夜航-50-7": {
+        "action": "Swipe",
+        "begin": [
+            525,
+            470
+        ],
+        "end": [
+            [
+                525,
+                120
+            ]
+        ],
+        "duration": [
+            3000
+        ],
+        "post_delay": 1000,
+        "timeout": 1000,
+        "next": [
+            "夜航-50-7-2"
+        ],
+        "on_error": [
+            "夜航-50-7"
+        ]
+    },
+    "夜航-50-7-2": {
+        "recognition": "OCR",
+        "expected": [
+            "爆破暴徒秽兽"
+        ],
+        "replace": [
+            [
+                "\\s+",
+                ""
+            ]
+        ],
+        "pre_delay": 0,
+        "action": "Custom",
+        "custom_action": "VoyageClick",
+        "post_delay": 0
+    }
+}
