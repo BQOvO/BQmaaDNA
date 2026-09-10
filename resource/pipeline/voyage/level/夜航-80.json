@@ -2,7 +2,7 @@
     "夜航-80-1": {
         "recognition": "OCR",
         "expected": [
-            "侵蚀钢拳铁卫"
+            "侵蚀帝皇之仁"
         ],
         "replace": [
             [
@@ -18,7 +18,7 @@
     "夜航-80-2": {
         "recognition": "OCR",
         "expected": [
-            "侵蚀红衫铁卫"
+            "侵蚀精锐士官"
         ],
         "replace": [
             [
@@ -34,7 +34,7 @@
     "夜航-80-3": {
         "recognition": "OCR",
         "expected": [
-            "守护失序的应天侍"
+            "复仇灼心秽兽"
         ],
         "replace": [
             [
@@ -50,7 +50,7 @@
     "夜航-80-4": {
         "recognition": "OCR",
         "expected": [
-            "复仇萼蚀秽兽"
+            "猩红飘浮秽兽"
         ],
         "replace": [
             [

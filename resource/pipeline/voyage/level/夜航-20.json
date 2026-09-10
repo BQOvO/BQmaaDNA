@@ -34,7 +34,7 @@
     "夜航-20-3": {
         "recognition": "OCR",
         "expected": [
-            "守护飘浮秽兽"
+            "守护飘浮秽兽Ⅱ"
         ],
         "replace": [
             [
@@ -64,41 +64,52 @@
         "post_delay": 0
     },
     "夜航-20-5": {
-        "recognition": "OCR",
-        "expected": [
-            "复仇蒙恩的先锋"
-        ],
-        "replace": [
-            [
-                "\\s+",
-                ""
-            ]
-        ],
-        "pre_delay": 0,
-        "action": "Custom",
-        "custom_action": "VoyageClick",
-        "post_delay": 0
+      "action": "Swipe",
+      "begin": [
+        525,
+        470
+      ],
+      "end": [
+        [
+          525,
+          120
+        ]
+      ],
+      "duration": [
+        3000
+      ],
+      "post_delay": 1000,
+      "timeout": 1000,
+      "next": [
+        "夜航-20-5-2"
+      ],
+      "on_error": [
+        "夜航-20-5"
+      ]
     },
     "夜航-20-6": {
-        "recognition": "DirectHit",
-        "action": "Swipe",
-        "begin": [
-            525,
-            550
-        ],
-        "end": [
-            [
-                525,
-                120
-            ]
-        ],
-        "duration": [
-            3000
-        ],
-        "post_delay": 1000,
-        "next": [
-            "夜航-20-6-1"
+      "action": "Swipe",
+      "begin": [
+        525,
+        470
+      ],
+      "end": [
+        [
+          525,
+          120
         ]
+      ],
+      "duration": [
+        3000
+      ],
+      "post_delay": 1000,
+      "timeout": 1000,
+      "next": [
+        "夜航-20-6-1"
+      ],
+      "on_error": [
+        "夜航-20-6"
+      ]
     },
     "夜航-20-6-1": {
         "recognition": "OCR",
@@ -115,5 +126,21 @@
         "action": "Custom",
         "custom_action": "VoyageClick",
         "post_delay": 0
+    },
+    "夜航-20-5-2": {
+      "recognition": "OCR",
+      "expected": [
+        "复仇蒙恩的先锋"
+      ],
+      "replace": [
+        [
+          "\\s+",
+          ""
+        ]
+      ],
+      "pre_delay": 0,
+      "action": "Custom",
+      "custom_action": "VoyageClick",
+      "post_delay": 0
     }
 }

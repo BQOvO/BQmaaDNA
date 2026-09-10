@@ -2,7 +2,7 @@
     "夜航-70-1": {
         "recognition": "OCR",
         "expected": [
-            "霹雳钢拳铁卫"
+            "霜狱狙击列兵"
         ],
         "replace": [
             [
@@ -18,7 +18,7 @@
     "夜航-70-2": {
         "recognition": "OCR",
         "expected": [
-            "凛霜失序的应天侍"
+            "转雷狙击列兵"
         ],
         "replace": [
             [
@@ -34,7 +34,7 @@
     "夜航-70-3": {
         "recognition": "OCR",
         "expected": [
-            "残火帝皇之仁"
+            "转雷野蜂暗箭"
         ],
         "replace": [
             [
@@ -50,7 +50,7 @@
     "夜航-70-4": {
         "recognition": "OCR",
         "expected": [
-            "浴血精锐士官"
+            "凛霜野蜂利刃"
         ],
         "replace": [
             [
@@ -64,6 +64,350 @@
         "post_delay": 0
     },
     "夜航-70-5": {
+        "action": "Swipe",
+        "begin": [
+            525,
+            470
+        ],
+        "end": [
+            [
+                525,
+                120
+            ]
+        ],
+        "duration": [
+            3000
+        ],
+        "post_delay": 1000,
+        "timeout": 1000,
+        "next": [
+            "夜航-70-5-2"
+        ],
+        "on_error": [
+            "夜航-70-5"
+        ]
+    },
+    "夜航-70-5-2": {
+        "recognition": "OCR",
+        "expected": [
+            "守护野蜂密探"
+        ],
+        "replace": [
+            [
+                "\\s+",
+                ""
+            ]
+        ],
+        "pre_delay": 0,
+        "action": "Custom",
+        "custom_action": "VoyageClick",
+        "post_delay": 0
+    },
+    "夜航-70-6": {
+        "action": "Swipe",
+        "begin": [
+            525,
+            470
+        ],
+        "end": [
+            [
+                525,
+                120
+            ]
+        ],
+        "duration": [
+            3000
+        ],
+        "post_delay": 1000,
+        "timeout": 1000,
+        "next": [
+            "夜航-70-6-2"
+        ],
+        "on_error": [
+            "夜航-70-6"
+        ]
+    },
+    "夜航-70-6-2": {
+        "recognition": "OCR",
+        "expected": [
+            "舍身野蜂暗箭"
+        ],
+        "replace": [
+            [
+                "\\s+",
+                ""
+            ]
+        ],
+        "pre_delay": 0,
+        "action": "Custom",
+        "custom_action": "VoyageClick",
+        "post_delay": 0
+    },
+    "夜航-70-7": {
+        "action": "Swipe",
+        "begin": [
+            525,
+            470
+        ],
+        "end": [
+            [
+                525,
+                120
+            ]
+        ],
+        "duration": [
+            3000
+        ],
+        "post_delay": 1000,
+        "timeout": 1000,
+        "next": [
+            "夜航-70-7-2"
+        ],
+        "on_error": [
+            "夜航-70-7"
+        ]
+    },
+    "夜航-70-7-2": {
+        "recognition": "OCR",
+        "expected": [
+            "残火野蜂利刃"
+        ],
+        "replace": [
+            [
+                "\\s+",
+                ""
+            ]
+        ],
+        "pre_delay": 0,
+        "action": "Custom",
+        "custom_action": "VoyageClick",
+        "post_delay": 0
+    },
+    "夜航-70-8": {
+        "action": "Swipe",
+        "begin": [
+            525,
+            470
+        ],
+        "end": [
+            [
+                525,
+                120
+            ]
+        ],
+        "duration": [
+            3000
+        ],
+        "post_delay": 1000,
+        "timeout": 1000,
+        "next": [
+            "夜航-70-8-2"
+        ],
+        "on_error": [
+            "夜航-70-8"
+        ]
+    },
+    "夜航-70-8-2": {
+        "recognition": "OCR",
+        "expected": [
+            "枯萎野蜂密探"
+        ],
+        "replace": [
+            [
+                "\\s+",
+                ""
+            ]
+        ],
+        "pre_delay": 0,
+        "action": "Custom",
+        "custom_action": "VoyageClick",
+        "post_delay": 0
+    },
+    "夜航-70-9": {
+        "action": "Swipe",
+        "begin": [
+            525,
+            470
+        ],
+        "end": [
+            [
+                525,
+                120
+            ]
+        ],
+        "duration": [
+            3000
+        ],
+        "post_delay": 1000,
+        "timeout": 1000,
+        "next": [
+            "夜航-70-9-2"
+        ],
+        "on_error": [
+            "夜航-70-9"
+        ]
+    },
+    "夜航-70-9-2": {
+        "recognition": "OCR",
+        "expected": [
+            "霹雳钢拳铁卫"
+        ],
+        "replace": [
+            [
+                "\\s+",
+                ""
+            ]
+        ],
+        "pre_delay": 0,
+        "action": "Custom",
+        "custom_action": "VoyageClick",
+        "post_delay": 0
+    },
+    "夜航-70-10": {
+        "action": "Swipe",
+        "begin": [
+            525,
+            470
+        ],
+        "end": [
+            [
+                525,
+                120
+            ]
+        ],
+        "duration": [
+            3000
+        ],
+        "post_delay": 1000,
+        "timeout": 1000,
+        "next": [
+            "夜航-70-10-2"
+        ],
+        "on_error": [
+            "夜航-70-10"
+        ]
+    },
+    "夜航-70-10-2": {
+        "recognition": "OCR",
+        "expected": [
+            "凛霜失序的应天侍"
+        ],
+        "replace": [
+            [
+                "\\s+",
+                ""
+            ]
+        ],
+        "pre_delay": 0,
+        "action": "Custom",
+        "custom_action": "VoyageClick",
+        "post_delay": 0
+    },
+    "夜航-70-11": {
+        "action": "Swipe",
+        "begin": [
+            525,
+            470
+        ],
+        "end": [
+            [
+                525,
+                120
+            ]
+        ],
+        "duration": [
+            3000
+        ],
+        "post_delay": 1000,
+        "timeout": 1000,
+        "next": [
+            "夜航-70-11-2"
+        ],
+        "on_error": [
+            "夜航-70-11"
+        ]
+    },
+    "夜航-70-11-2": {
+        "recognition": "OCR",
+        "expected": [
+            "残火帝皇之仁"
+        ],
+        "replace": [
+            [
+                "\\s+",
+                ""
+            ]
+        ],
+        "pre_delay": 0,
+        "action": "Custom",
+        "custom_action": "VoyageClick",
+        "post_delay": 0
+    },
+    "夜航-70-12": {
+        "action": "Swipe",
+        "begin": [
+            525,
+            470
+        ],
+        "end": [
+            [
+                525,
+                120
+            ]
+        ],
+        "duration": [
+            3000
+        ],
+        "post_delay": 1000,
+        "timeout": 1000,
+        "next": [
+            "夜航-70-12-2"
+        ],
+        "on_error": [
+            "夜航-70-12"
+        ]
+    },
+    "夜航-70-12-2": {
+        "recognition": "OCR",
+        "expected": [
+            "浴血精锐士官"
+        ],
+        "replace": [
+            [
+                "\\s+",
+                ""
+            ]
+        ],
+        "pre_delay": 0,
+        "action": "Custom",
+        "custom_action": "VoyageClick",
+        "post_delay": 0
+    },
+    "夜航-70-13": {
+        "action": "Swipe",
+        "begin": [
+            525,
+            470
+        ],
+        "end": [
+            [
+                525,
+                120
+            ]
+        ],
+        "duration": [
+            3000
+        ],
+        "post_delay": 1000,
+        "timeout": 1000,
+        "next": [
+            "夜航-70-13-2"
+        ],
+        "on_error": [
+            "夜航-70-13"
+        ]
+    },
+    "夜航-70-13-2": {
         "recognition": "OCR",
         "expected": [
             "掠影狙击列兵"
@@ -79,7 +423,31 @@
         "custom_action": "VoyageClick",
         "post_delay": 0
     },
-    "夜航-70-6-2": {
+    "夜航-70-14": {
+        "action": "Swipe",
+        "begin": [
+            525,
+            470
+        ],
+        "end": [
+            [
+                525,
+                120
+            ]
+        ],
+        "duration": [
+            3000
+        ],
+        "post_delay": 1000,
+        "timeout": 1000,
+        "next": [
+            "夜航-70-14-2"
+        ],
+        "on_error": [
+            "夜航-70-14"
+        ]
+    },
+    "夜航-70-14-2": {
         "recognition": "OCR",
         "expected": [
             "霜狱劈斩列兵"
@@ -95,7 +463,31 @@
         "custom_action": "VoyageClick",
         "post_delay": 0
     },
-    "夜航-70-7-2": {
+    "夜航-70-15": {
+        "action": "Swipe",
+        "begin": [
+            525,
+            470
+        ],
+        "end": [
+            [
+                525,
+                120
+            ]
+        ],
+        "duration": [
+            3000
+        ],
+        "post_delay": 1000,
+        "timeout": 1000,
+        "next": [
+            "夜航-70-15-2"
+        ],
+        "on_error": [
+            "夜航-70-15"
+        ]
+    },
+    "夜航-70-15-2": {
         "recognition": "OCR",
         "expected": [
             "转雷远征列兵"
@@ -111,7 +503,31 @@
         "custom_action": "VoyageClick",
         "post_delay": 0
     },
-    "夜航-70-8-2": {
+    "夜航-70-16": {
+        "action": "Swipe",
+        "begin": [
+            525,
+            470
+        ],
+        "end": [
+            [
+                525,
+                120
+            ]
+        ],
+        "duration": [
+            3000
+        ],
+        "post_delay": 1000,
+        "timeout": 1000,
+        "next": [
+            "夜航-70-16-2"
+        ],
+        "on_error": [
+            "夜航-70-16"
+        ]
+    },
+    "夜航-70-16-2": {
         "recognition": "OCR",
         "expected": [
             "守护突击列兵"
@@ -126,68 +542,5 @@
         "action": "Custom",
         "custom_action": "VoyageClick",
         "post_delay": 0
-    },
-    "夜航-70-7": {
-        "recognition": "DirectHit",
-        "action": "Swipe",
-        "begin": [
-            525,
-            550
-        ],
-        "end": [
-            [
-                525,
-                120
-            ]
-        ],
-        "duration": [
-            3000
-        ],
-        "post_delay": 1000,
-        "next": [
-            "夜航-70-7-2"
-        ]
-    },
-    "夜航-70-8": {
-        "recognition": "DirectHit",
-        "action": "Swipe",
-        "begin": [
-            525,
-            550
-        ],
-        "end": [
-            [
-                525,
-                120
-            ]
-        ],
-        "duration": [
-            3000
-        ],
-        "post_delay": 1000,
-        "next": [
-            "夜航-70-8-2"
-        ]
-    },
-    "夜航-70-6": {
-        "recognition": "DirectHit",
-        "action": "Swipe",
-        "begin": [
-            525,
-            550
-        ],
-        "end": [
-            [
-                525,
-                120
-            ]
-        ],
-        "duration": [
-            3000
-        ],
-        "post_delay": 1000,
-        "next": [
-            "夜航-70-6-2"
-        ]
     }
 }

@@ -18,7 +18,7 @@
     "夜航-40-2": {
         "recognition": "OCR",
         "expected": [
-            "复仇飘浮秽兽"
+            "复仇飘浮秽兽Ⅱ"
         ],
         "replace": [
             [
@@ -64,6 +64,30 @@
         "post_delay": 0
     },
     "夜航-40-5": {
+        "action": "Swipe",
+        "begin": [
+            525,
+            470
+        ],
+        "end": [
+            [
+                525,
+                120
+            ]
+        ],
+        "duration": [
+            3000
+        ],
+        "post_delay": 1000,
+        "timeout": 1000,
+        "next": [
+            "夜航-40-5-2"
+        ],
+        "on_error": [
+            "夜航-40-5"
+        ]
+    },
+    "夜航-40-5-2": {
         "recognition": "OCR",
         "expected": [
             "复仇疾冲秽兽"
