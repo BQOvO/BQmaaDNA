@@ -1,14 +1,4 @@
 {
-  "夜航65-再接再厉": {
-    "pre_delay": 0,
-    "action": "Custom",
-    "custom_action": "outnoder",
-    "custom_action_param": "再接再厉",
-    "post_delay": 0,
-    "next": [
-      "夜航65-失败计数"
-    ]
-  },
   "夜航65-下一把": {
     "pre_delay": 0,
     "action": "Custom",
@@ -20,6 +10,16 @@
     "post_delay": 0,
     "next": [
       "[Anchor]夜航65-回到加载"
+    ]
+  },
+  "夜航65-再接再厉": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "outnoder",
+    "custom_action_param": "再接再厉",
+    "post_delay": 0,
+    "next": [
+      "[Anchor]夜航65-回到计数"
     ]
   },
   "夜航65-加载中": {
@@ -65,35 +65,50 @@
   "夜航65-失败后等待节点": {
     "post_delay": 1000
   },
-  "夜航65-失败计数": {
-    "pre_delay": 0,
-    "action": "Custom",
-    "custom_action": "Count",
-    "custom_action_param": {
-      "id": "failed"
-    },
-    "anchor": {
-      "夜航65-回到计数": "夜航65-总计数"
-    },
-    "post_delay": 0,
-    "on_error": [
-      "[Anchor]夜航65-回到计数"
-    ]
-  },
-  "夜航65-寻找65": {
+  "夜航65-寻找80": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
-    "custom_action_param": "夜航-等级条上滑动",
+    "custom_action_param": "夜航-等级条下滑动",
     "post_delay": 1000,
     "next": [
-      "夜航65-点击65"
+      "夜航65-点击80"
     ]
   },
-  "夜航65-总计数": {
+  "夜航65-寻路": {
     "pre_delay": 0,
     "action": "Custom",
-    "custom_action": "Count",
+    "custom_action": "MacroPlayer",
+    "custom_action_param": {
+      "file": "夜航手册65/夜航手册65.macro"
+    },
+    "post_delay": 0,
+    "focus": {
+      "Node.Action.Succeeded": "到达挂机点，开刷！",
+      "Node.Recognition.Starting": "(ง •̀_•́)ง 自动寻路中，马上就到！"
+    },
+    "next": [
+      "夜航65-超时计时开始"
+    ]
+  },
+  "夜航65-计数+1": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "CountAdd",
+    "custom_action_param": {
+      "id": "all",
+      "step": 1,
+      "target": 10
+    },
+    "post_delay": 0,
+    "next": [
+      "夜航65-计数检查"
+    ]
+  },
+  "夜航65-计数检查": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "CountCheck",
     "custom_action_param": {
       "id": "all",
       "target": 10
@@ -106,16 +121,30 @@
       "夜航65-输出信息节点2"
     ]
   },
-  "夜航65-成功计数": {
+  "夜航65-成功+1": {
     "pre_delay": 0,
     "action": "Custom",
-    "custom_action": "Count",
+    "custom_action": "CountAdd",
     "custom_action_param": {
-      "id": "success"
+      "id": "success",
+      "step": 1
     },
     "post_delay": 0,
-    "on_error": [
-      "夜航65-总计数"
+    "next": [
+      "夜航65-计数+1"
+    ]
+  },
+  "夜航65-失败+1": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "CountAdd",
+    "custom_action_param": {
+      "id": "failed",
+      "step": 1
+    },
+    "post_delay": 0,
+    "next": [
+      "夜航65-超时处理"
     ]
   },
   "夜航65-放弃挑战": {
@@ -140,20 +169,21 @@
       "夜航65-角色主控"
     ],
     "on_error": [
-      "夜航65-超时处理"
+      "夜航65-失败+1"
     ]
   },
-  "夜航65-检测是否完成委托": {
+  "夜航65-TextWatcher": {
     "pre_delay": 0,
     "action": "Custom",
-    "custom_action": "Looper",
+    "custom_action": "TextWatcher",
     "custom_action_param": {
-      "count": 3,
-      "nodes": [
-        "委托完成"
-      ]
+      "config": 1
     },
     "post_delay": 0,
+    "focus": {
+      "Node.Action.Succeeded": "TextWatcher: 检测到目标文本"
+    },
+    "time": 10,
     "next": [
       "夜航65-结束计时"
     ],
@@ -170,13 +200,13 @@
       33
     ],
     "expected": [
-      "扼守"
+      "驱离"
     ],
     "next": [
-      "夜航65-超时计时开始"
+      "夜航65-寻路"
     ]
   },
-  "夜航65-点击65": {
+  "夜航65-点击80": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
@@ -203,6 +233,9 @@
     ]
   },
   "夜航65-等待退出节点": {
+    "anchor": {
+      "夜航65-回到计数": "夜航65-计数+1"
+    },
     "post_delay": 1000,
     "timeout": 100,
     "next": [
@@ -216,7 +249,8 @@
     "custom_action": "TimeoutReset",
     "post_delay": 0,
     "next": [
-      "夜航65-成功计数"
+      "夜航65-成功+1",
+      "夜航65-轮次+1"
     ]
   },
   "夜航65-角色主控": {
@@ -226,7 +260,7 @@
     "custom_action_param": "黎瑟",
     "post_delay": 0,
     "next": [
-      "夜航65-检测轮次"
+      "夜航65-TextWatcher"
     ]
   },
   "夜航65-超时处理": {
@@ -247,15 +281,14 @@
     "action": "Custom",
     "custom_action": "TimeoutStart",
     "custom_action_param": {
-      "duration": 180
+      "duration": 60
     },
     "post_delay": 1000,
     "focus": {
       "Node.Recognition.Starting": "⏱ 超时倒计时开始"
     },
     "next": [
-      "夜航65-地图识别1",
-      "夜航65-地图识别2"
+      "夜航65-角色主控"
     ]
   },
   "夜航65-输出信息节点1": {
@@ -263,7 +296,7 @@
     "action": "Custom",
     "custom_action": "CountPrint",
     "custom_action_param": {
-      "msg": "夜航手册65已全部完成 失败{failed}次 成功{success}次"
+      "msg": "已全部完成 | 失败{failed}次 | 成功{success}次"
     },
     "post_delay": 0,
     "next": [
@@ -275,11 +308,21 @@
     "action": "Custom",
     "custom_action": "CountPrint",
     "custom_action_param": {
-      "msg": "夜航手册65已完成{all}/{all_target}次 失败{failed}次 成功{success}次"
+      "msg": "已完成{all}/{all_target}次 | 失败{failed}次 | 成功{success}次"
     },
     "post_delay": 0,
     "next": [
       "夜航65-下一把"
+    ]
+  },
+  "夜航65-进入副本": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "outnoder",
+    "custom_action_param": "夜航手册进入副本流程",
+    "post_delay": 0,
+    "next": [
+      "夜航65-加载中间过渡节点"
     ]
   },
   "夜航65-进入夜航手册": {
@@ -292,7 +335,7 @@
       "Node.Recognition.Succeeded": "进入夜航手册界面~"
     },
     "next": [
-      "夜航65-寻找65"
+      "夜航65-寻找80"
     ]
   },
   "夜航65-退出委托流程": {
@@ -301,16 +344,6 @@
     "custom_action": "outnoder",
     "custom_action_param": "退出委托",
     "post_delay": 0
-  },
-  "夜航65-进入副本": {
-    "pre_delay": 0,
-    "action": "Custom",
-    "custom_action": "outnoder",
-    "custom_action_param": "夜航手册进入副本流程（无尽）",
-    "post_delay": 0,
-    "next": [
-      "夜航65-加载中间过渡节点"
-    ]
   },
   "夜航65-选择副本": {
     "pre_delay": 0,
@@ -322,105 +355,100 @@
       "夜航65-进入副本"
     ]
   },
-  "夜航65-检测轮次": {
+  "夜航65-轮次+1": {
+    "pre_delay": 0,
     "action": "Custom",
-    "custom_action": "RoundTracker",
-    "focus": {
-      "Node.Action.Starting": "正在检测轮次变化..."
+    "custom_action": "CountAdd",
+    "custom_action_param": {
+      "id": "round",
+      "step": 1
     },
+    "post_delay": 0,
     "next": [
-      "夜航65-重置超时"
+      "夜航65-轮次比较"
+    ]
+  },
+  "夜航65-轮次比较": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "CountCheck",
+    "custom_action_param": {
+      "id": "round",
+      "target": 3
+    },
+    "post_delay": 0,
+    "next": [
+      "夜航65-轮次完成"
     ],
     "on_error": [
-      "夜航65-检测是否完成委托"
+      "夜航65-轮次信息"
     ]
   },
-  "夜航65-重置超时": {
-    "action": "Custom",
-    "custom_action": "TimeoutReset",
-    "next": [
-      "夜航65-重新计时"
-    ]
-  },
-  "夜航65-重新计时": {
-    "action": "Custom",
-    "custom_action": "TimeoutStart",
-    "custom_action_param": {
-      "duration": 180
-    },
-    "focus": {
-      "Node.Recognition.Succeeded": "进入下一轮次，超时计时重置"
-    },
-    "next": [
-      "夜航65-检测是否完成委托"
-    ]
-  },
-  "夜航65-寻路1": {
+  "夜航65-轮次信息": {
     "pre_delay": 0,
     "action": "Custom",
-    "custom_action": "MacroPlayer",
+    "custom_action": "CountPrint",
     "custom_action_param": {
-      "file": "夜航手册65/夜航手册65-1.macro"
+      "msg": "已完成{round}轮"
     },
     "post_delay": 0,
-    "focus": {
-      "Node.Action.Succeeded": "到达挂机点，开刷！",
-      "Node.Recognition.Starting": "(ง •̀_•́)ง 自动寻路中，马上就到！"
-    },
     "next": [
-      "夜航65-角色主控"
+      "夜航65-未完成用户设定轮次"
     ]
   },
-  "夜航65-寻路2": {
+  "夜航65-轮次选书": {
     "pre_delay": 0,
     "action": "Custom",
-    "custom_action": "MacroPlayer",
+    "custom_action": "outnoder",
+    "custom_action_param": "不选书",
+    "post_delay": 0,
+    "next": [
+      "[Anchor]夜航65-回到挂机"
+    ]
+  },
+  "夜航65-未完成用户设定轮次": {
+    "recognition": "OCR",
+    "expected": [
+      "继续挑战"
+    ],
+    "action": "Click",
+    "anchor": {
+      "夜航65-回到挂机": "夜航65-TextWatcher"
+    },
+    "next": [
+      "夜航65-轮次选书"
+    ]
+  },
+  "夜航65-轮次完成": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "CountPrint",
     "custom_action_param": {
-      "file": "夜航手册65/夜航手册65-2.macro"
+      "msg": "用户设定{round_target}轮次已全部完成"
     },
     "post_delay": 0,
-    "focus": {
-      "Node.Action.Succeeded": "到达挂机点，开刷！",
-      "Node.Recognition.Starting": "(ง •̀_•́)ง 自动寻路中，马上就到！"
-    },
     "next": [
-      "夜航65-角色主控"
+      "夜航65-清理轮次"
     ]
   },
-  "夜航65-地图识别1": {
-    "recognition": "TemplateMatch",
-    "roi": [
-      461,
-      242,
-      359,
-      251
-    ],
-    "template": [
-      "夜航手册map/扼守-1.png"
-    ],
-    "focus": {
-      "Node.Recognition.Succeeded": "识别到地图1：扼守-1"
-    },
+  "夜航65-清理轮次": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "CountReset",
+    "custom_action_param": "round",
+    "post_delay": 0,
     "next": [
-      "夜航65-寻路1"
+      "夜航65-满足用户设定轮次"
     ]
   },
-  "夜航65-地图识别2": {
-    "recognition": "TemplateMatch",
-    "roi": [
-      461,
-      242,
-      359,
-      251
+  "夜航65-满足用户设定轮次": {
+    "recognition": "OCR",
+    "expected": [
+      "撤退"
     ],
-    "template": [
-      "夜航手册map/扼守-2.png"
-    ],
-    "focus": {
-      "Node.Recognition.Succeeded": "识别到地图2：扼守-2"
-    },
+    "action": "Click",
     "next": [
-      "夜航65-寻路2"
+      "夜航65-成功+1"
     ]
   }
 }

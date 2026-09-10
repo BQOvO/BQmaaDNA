@@ -3,7 +3,7 @@
     {
       "name": "夜航手册70",
       "entry": "夜航70-启动",
-      "description": "resource/descs/nightguide/70.md",
+      "description": "【夜航手册】\n\n1.在执行其他任务前可以先执行一下自动调设置任务，确保游戏为挂机所需的设置\n\n2.请合理配置超时时间\n\n3.请不要在任务执行过程中手动操作",
       "option": [
         "夜航70副本选择",
         "夜航70加成书选择",
@@ -17,70 +17,312 @@
     "夜航70副本选择": {
       "label": "副本选择",
       "type": "select",
-      "default_case": "第一个",
+      "default_case": "第一个（霜狱 狙击列兵）",
       "description": "选择第几个副本进行刷取",
       "cases": [
         {
-          "name": "第一个",
+          "name": "第一个（霜狱 狙击列兵）",
           "pipeline_override": {
             "夜航70-选择副本": {
               "custom_action_param": "夜航-70-1"
+            },
+            "夜航70-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航70-结束计时": {
+              "next": [
+                "夜航70-成功+1"
+              ]
             }
           }
         },
         {
-          "name": "第二个",
+          "name": "第二个（转雷 狙击列兵）",
           "pipeline_override": {
             "夜航70-选择副本": {
               "custom_action_param": "夜航-70-2"
+            },
+            "夜航70-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航70-结束计时": {
+              "next": [
+                "夜航70-成功+1"
+              ]
             }
           }
         },
         {
-          "name": "第三个",
+          "name": "第三个（转雷 野蜂暗箭）",
           "pipeline_override": {
             "夜航70-选择副本": {
               "custom_action_param": "夜航-70-3"
+            },
+            "夜航70-检测是否成功进入副本": {
+              "expected": [
+                "扼守"
+              ]
+            },
+            "夜航70-结束计时": {
+              "next": [
+                "夜航70-轮次+1"
+              ]
             }
-          }
+          },
+          "option": [
+            "夜航70轮次选择"
+          ]
         },
         {
-          "name": "第四个",
+          "name": "第四个（凛霜 野蜂利刃）",
           "pipeline_override": {
             "夜航70-选择副本": {
               "custom_action_param": "夜航-70-4"
+            },
+            "夜航70-检测是否成功进入副本": {
+              "expected": [
+                "扼守"
+              ]
+            },
+            "夜航70-结束计时": {
+              "next": [
+                "夜航70-轮次+1"
+              ]
             }
-          }
+          },
+          "option": [
+            "夜航70轮次选择"
+          ]
         },
         {
-          "name": "第五个",
+          "name": "第五个（守护 野蜂密探）",
           "pipeline_override": {
             "夜航70-选择副本": {
               "custom_action_param": "夜航-70-5"
+            },
+            "夜航70-检测是否成功进入副本": {
+              "expected": [
+                "扼守"
+              ]
+            },
+            "夜航70-结束计时": {
+              "next": [
+                "夜航70-轮次+1"
+              ]
             }
-          }
+          },
+          "option": [
+            "夜航70轮次选择"
+          ]
         },
         {
-          "name": "第六个",
+          "name": "第六个（舍身 野蜂暗箭）",
           "pipeline_override": {
             "夜航70-选择副本": {
               "custom_action_param": "夜航-70-6"
+            },
+            "夜航70-检测是否成功进入副本": {
+              "expected": [
+                "扼守"
+              ]
+            },
+            "夜航70-结束计时": {
+              "next": [
+                "夜航70-轮次+1"
+              ]
             }
-          }
+          },
+          "option": [
+            "夜航70轮次选择"
+          ]
         },
         {
-          "name": "第七个",
+          "name": "第七个（残火 野蜂利刃）",
           "pipeline_override": {
             "夜航70-选择副本": {
               "custom_action_param": "夜航-70-7"
+            },
+            "夜航70-检测是否成功进入副本": {
+              "expected": [
+                "扼守"
+              ]
+            },
+            "夜航70-结束计时": {
+              "next": [
+                "夜航70-轮次+1"
+              ]
+            }
+          },
+          "option": [
+            "夜航70轮次选择"
+          ]
+        },
+        {
+          "name": "第八个（枯萎 野蜂密探）",
+          "pipeline_override": {
+            "夜航70-选择副本": {
+              "custom_action_param": "夜航-70-8"
+            },
+            "夜航70-检测是否成功进入副本": {
+              "expected": [
+                "扼守"
+              ]
+            },
+            "夜航70-结束计时": {
+              "next": [
+                "夜航70-轮次+1"
+              ]
+            }
+          },
+          "option": [
+            "夜航70轮次选择"
+          ]
+        },
+        {
+          "name": "第九个（霹雳 钢拳铁卫）",
+          "pipeline_override": {
+            "夜航70-选择副本": {
+              "custom_action_param": "夜航-70-9"
+            },
+            "夜航70-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航70-结束计时": {
+              "next": [
+                "夜航70-成功+1"
+              ]
             }
           }
         },
         {
-          "name": "第八个",
+          "name": "第十个（凛霜 失序的应天侍）",
           "pipeline_override": {
             "夜航70-选择副本": {
-              "custom_action_param": "夜航-70-8"
+              "custom_action_param": "夜航-70-10"
+            },
+            "夜航70-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航70-结束计时": {
+              "next": [
+                "夜航70-成功+1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "第十一个（残火 帝皇之仁）",
+          "pipeline_override": {
+            "夜航70-选择副本": {
+              "custom_action_param": "夜航-70-11"
+            },
+            "夜航70-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航70-结束计时": {
+              "next": [
+                "夜航70-成功+1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "第十二个（浴血 精锐士官）",
+          "pipeline_override": {
+            "夜航70-选择副本": {
+              "custom_action_param": "夜航-70-12"
+            },
+            "夜航70-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航70-结束计时": {
+              "next": [
+                "夜航70-成功+1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "第十三个（掠影 狙击列兵）",
+          "pipeline_override": {
+            "夜航70-选择副本": {
+              "custom_action_param": "夜航-70-13"
+            },
+            "夜航70-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航70-结束计时": {
+              "next": [
+                "夜航70-成功+1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "第十四个（霜狱 劈斩列兵）",
+          "pipeline_override": {
+            "夜航70-选择副本": {
+              "custom_action_param": "夜航-70-14"
+            },
+            "夜航70-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航70-结束计时": {
+              "next": [
+                "夜航70-成功+1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "第十五个（转雷 远征列兵）",
+          "pipeline_override": {
+            "夜航70-选择副本": {
+              "custom_action_param": "夜航-70-15"
+            },
+            "夜航70-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航70-结束计时": {
+              "next": [
+                "夜航70-成功+1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "第十六个（守护 突击列兵）",
+          "pipeline_override": {
+            "夜航70-选择副本": {
+              "custom_action_param": "夜航-70-16"
+            },
+            "夜航70-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航70-结束计时": {
+              "next": [
+                "夜航70-成功+1"
+              ]
             }
           }
         }
@@ -101,6 +343,9 @@
             },
             "再次进行选书": {
               "custom_action_param": "不选书"
+            },
+            "夜航70-轮次选书": {
+              "custom_action_param": "不选书"
             }
           }
         },
@@ -112,6 +357,9 @@
               "custom_action_param": "绿书"
             },
             "再次进行选书": {
+              "custom_action_param": "绿书"
+            },
+            "夜航70-轮次选书": {
               "custom_action_param": "绿书"
             }
           }
@@ -125,6 +373,9 @@
             },
             "再次进行选书": {
               "custom_action_param": "蓝书"
+            },
+            "夜航70-轮次选书": {
+              "custom_action_param": "蓝书"
             }
           }
         },
@@ -137,6 +388,9 @@
             },
             "再次进行选书": {
               "custom_action_param": "紫书"
+            },
+            "夜航70-轮次选书": {
+              "custom_action_param": "紫书"
             }
           }
         },
@@ -148,6 +402,9 @@
               "custom_action_param": "金书"
             },
             "再次进行选书": {
+              "custom_action_param": "金书"
+            },
+            "夜航70-轮次选书": {
               "custom_action_param": "金书"
             }
           }
@@ -185,7 +442,7 @@
         }
       ],
       "pipeline_override": {
-        "夜航70-总计数": {
+        "夜航70-计数检查": {
           "custom_action_param": {
             "id": "all",
             "target": "{刷取次数}"
@@ -235,13 +492,8 @@
         }
       ],
       "pipeline_override": {
-        "夜航70-检测是否完成委托": {
-          "custom_action_param": {
-            "count": "{黎瑟技能释放间隔}",
-            "nodes": [
-              "委托完成"
-            ]
-          }
+        "夜航70-TextWatcher": {
+          "time": "{黎瑟技能释放间隔}"
         }
       }
     },
@@ -258,12 +510,29 @@
         }
       ],
       "pipeline_override": {
-        "夜航70-检测是否完成委托": {
+        "夜航70-TextWatcher": {
+          "time": "{水母技能释放间隔}"
+        }
+      }
+    },
+    "夜航70轮次选择": {
+      "label": "轮次选择",
+      "type": "input",
+      "description": "设置自动轮次功能的目标轮数",
+      "inputs": [
+        {
+          "name": "轮次",
+          "description": "输入目标轮次",
+          "default": "1",
+          "pipeline_type": "int",
+          "verify": "^(?:[1-9]|[1-9]\\d|100)$"
+        }
+      ],
+      "pipeline_override": {
+        "夜航70-轮次比较": {
           "custom_action_param": {
-            "count": "{水母技能释放间隔}",
-            "nodes": [
-              "委托完成"
-            ]
+            "id": "round",
+            "target": "{轮次}"
           }
         }
       }

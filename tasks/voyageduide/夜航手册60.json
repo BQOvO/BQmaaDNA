@@ -3,7 +3,7 @@
     {
       "name": "夜航手册60",
       "entry": "夜航60-启动",
-      "description": "resource/descs/nightguide/60.md",
+      "description": "【夜航手册】\n\n1.在执行其他任务前可以先执行一下自动调设置任务，确保游戏为挂机所需的设置\n\n2.请合理配置超时时间\n\n3.请不要在任务执行过程中手动操作",
       "option": [
         "夜航60副本选择",
         "夜航60加成书选择",
@@ -17,128 +17,348 @@
     "夜航60副本选择": {
       "label": "副本选择",
       "type": "select",
-      "default_case": "第一个",
+      "default_case": "第一个（舍身 疾冲秽兽）",
       "description": "选择第几个副本进行刷取",
       "cases": [
         {
-          "name": "第一个",
+          "name": "第一个（舍身 疾冲秽兽）",
           "pipeline_override": {
             "夜航60-选择副本": {
               "custom_action_param": "夜航-60-1"
-            }
-          }
-        },
-        {
-          "name": "第二个",
-          "pipeline_override": {
-            "夜航60-选择副本": {
-              "custom_action_param": "夜航-60-2"
-            }
-          }
-        },
-        {
-          "name": "第三个",
-          "pipeline_override": {
-            "夜航60-选择副本": {
-              "custom_action_param": "夜航-60-3"
-            }
-          }
-        },
-        {
-          "name": "第四个",
-          "pipeline_override": {
-            "夜航60-选择副本": {
-              "custom_action_param": "夜航-60-4"
-            }
-          }
-        },
-        {
-          "name": "第五个",
-          "pipeline_override": {
-            "夜航60-选择副本": {
-              "custom_action_param": "夜航-60-5"
-            }
-          }
-        },
-        {
-          "name": "第六个",
-          "pipeline_override": {
-            "夜航60-选择副本": {
-              "custom_action_param": "夜航-60-6"
-            }
-          }
-        },
-        {
-          "name": "第七个",
-          "pipeline_override": {
-            "夜航60-选择副本": {
-              "custom_action_param": "夜航-60-7"
-            }
-          }
-        },
-        {
-          "name": "第八个（主控只能选黎瑟）",
-          "pipeline_override": {
-            "夜航60-选择副本": {
-              "custom_action_param": "夜航-60-8"
-            },
-            "夜航60-寻路": {
-              "custom_action_param": {
-                "file": "夜航手册60·驱逐.json"
-              }
             },
             "夜航60-检测是否成功进入副本": {
               "expected": [
-                "驱逐"
+                "驱离"
+              ]
+            },
+            "夜航60-结束计时": {
+              "next": [
+                "夜航60-成功+1"
               ]
             }
           }
         },
         {
-          "name": "第九个",
+          "name": "第二个（舍身 游击秽兽）",
+          "pipeline_override": {
+            "夜航60-选择副本": {
+              "custom_action_param": "夜航-60-2"
+            },
+            "夜航60-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航60-结束计时": {
+              "next": [
+                "夜航60-成功+1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "第三个（舍身 暴徒秽兽）",
+          "pipeline_override": {
+            "夜航60-选择副本": {
+              "custom_action_param": "夜航-60-3"
+            },
+            "夜航60-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航60-结束计时": {
+              "next": [
+                "夜航60-成功+1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "第四个（爆破 野蜂密探）",
+          "pipeline_override": {
+            "夜航60-选择副本": {
+              "custom_action_param": "夜航-60-4"
+            },
+            "夜航60-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航60-结束计时": {
+              "next": [
+                "夜航60-成功+1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "第五个（猩红 野蜂暗箭）",
+          "pipeline_override": {
+            "夜航60-选择副本": {
+              "custom_action_param": "夜航-60-5"
+            },
+            "夜航60-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航60-结束计时": {
+              "next": [
+                "夜航60-成功+1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "第六个（残火 钢拳铁卫）",
+          "pipeline_override": {
+            "夜航60-选择副本": {
+              "custom_action_param": "夜航-60-6"
+            },
+            "夜航60-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航60-结束计时": {
+              "next": [
+                "夜航60-成功+1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "第七个（枯萎 红衫铁卫）",
+          "pipeline_override": {
+            "夜航60-选择副本": {
+              "custom_action_param": "夜航-60-7"
+            },
+            "夜航60-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航60-结束计时": {
+              "next": [
+                "夜航60-成功+1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "第八个（爆破 魁蕊秽兽）",
+          "pipeline_override": {
+            "夜航60-选择副本": {
+              "custom_action_param": "夜航-60-8"
+            },
+            "夜航60-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航60-结束计时": {
+              "next": [
+                "夜航60-成功+1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "第九个（转雷 萼蚀秽兽）",
           "pipeline_override": {
             "夜航60-选择副本": {
               "custom_action_param": "夜航-60-9"
+            },
+            "夜航60-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航60-结束计时": {
+              "next": [
+                "夜航60-成功+1"
+              ]
             }
           }
         },
         {
-          "name": "第十个",
+          "name": "第十个（舍身 芳烬秽兽）",
           "pipeline_override": {
             "夜航60-选择副本": {
               "custom_action_param": "夜航-60-10"
+            },
+            "夜航60-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航60-结束计时": {
+              "next": [
+                "夜航60-成功+1"
+              ]
             }
           }
         },
         {
-          "name": "第十一个",
+          "name": "第十一个（掠影 失序的应天侍）",
           "pipeline_override": {
             "夜航60-选择副本": {
               "custom_action_param": "夜航-60-11"
+            },
+            "夜航60-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航60-结束计时": {
+              "next": [
+                "夜航60-成功+1"
+              ]
             }
           }
         },
         {
-          "name": "第十二个",
+          "name": "第十二个（霹雳 魁蕊秽兽）",
           "pipeline_override": {
             "夜航60-选择副本": {
               "custom_action_param": "夜航-60-12"
+            },
+            "夜航60-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航60-结束计时": {
+              "next": [
+                "夜航60-成功+1"
+              ]
             }
           }
         },
         {
-          "name": "第十三个",
+          "name": "第十三个（舍身 萼蚀秽兽）",
           "pipeline_override": {
             "夜航60-选择副本": {
               "custom_action_param": "夜航-60-13"
+            },
+            "夜航60-检测是否成功进入副本": {
+              "expected": [
+                "驱逐"
+              ]
+            },
+            "夜航60-结束计时": {
+              "next": [
+                "夜航60-成功+1"
+              ]
             }
           }
         },
         {
-          "name": "第十四个",
+          "name": "第十四个（猩红 狙击列兵）",
           "pipeline_override": {
             "夜航60-选择副本": {
               "custom_action_param": "夜航-60-14"
+            },
+            "夜航60-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航60-结束计时": {
+              "next": [
+                "夜航60-成功+1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "第十五个（复仇 劈斩列兵）",
+          "pipeline_override": {
+            "夜航60-选择副本": {
+              "custom_action_param": "夜航-60-15"
+            },
+            "夜航60-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航60-结束计时": {
+              "next": [
+                "夜航60-成功+1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "第十六个（枯萎 远征列兵）",
+          "pipeline_override": {
+            "夜航60-选择副本": {
+              "custom_action_param": "夜航-60-16"
+            },
+            "夜航60-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航60-结束计时": {
+              "next": [
+                "夜航60-成功+1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "第十七个（残火 突击列兵）",
+          "pipeline_override": {
+            "夜航60-选择副本": {
+              "custom_action_param": "夜航-60-17"
+            },
+            "夜航60-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航60-结束计时": {
+              "next": [
+                "夜航60-成功+1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "第十八个（凛霜 警戒机）",
+          "pipeline_override": {
+            "夜航60-选择副本": {
+              "custom_action_param": "夜航-60-18"
+            },
+            "夜航60-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航60-结束计时": {
+              "next": [
+                "夜航60-成功+1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "第十九个（转雷 佩剑炼金术师）",
+          "pipeline_override": {
+            "夜航60-选择副本": {
+              "custom_action_param": "夜航-60-19"
+            },
+            "夜航60-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航60-结束计时": {
+              "next": [
+                "夜航60-成功+1"
+              ]
             }
           }
         }
@@ -159,6 +379,9 @@
             },
             "再次进行选书": {
               "custom_action_param": "不选书"
+            },
+            "夜航60-轮次选书": {
+              "custom_action_param": "不选书"
             }
           }
         },
@@ -170,6 +393,9 @@
               "custom_action_param": "绿书"
             },
             "再次进行选书": {
+              "custom_action_param": "绿书"
+            },
+            "夜航60-轮次选书": {
               "custom_action_param": "绿书"
             }
           }
@@ -183,6 +409,9 @@
             },
             "再次进行选书": {
               "custom_action_param": "蓝书"
+            },
+            "夜航60-轮次选书": {
+              "custom_action_param": "蓝书"
             }
           }
         },
@@ -195,6 +424,9 @@
             },
             "再次进行选书": {
               "custom_action_param": "紫书"
+            },
+            "夜航60-轮次选书": {
+              "custom_action_param": "紫书"
             }
           }
         },
@@ -206,6 +438,9 @@
               "custom_action_param": "金书"
             },
             "再次进行选书": {
+              "custom_action_param": "金书"
+            },
+            "夜航60-轮次选书": {
               "custom_action_param": "金书"
             }
           }
@@ -243,7 +478,7 @@
         }
       ],
       "pipeline_override": {
-        "夜航60-总计数": {
+        "夜航60-计数检查": {
           "custom_action_param": {
             "id": "all",
             "target": "{刷取次数}"
@@ -293,13 +528,8 @@
         }
       ],
       "pipeline_override": {
-        "夜航60-检测是否完成委托": {
-          "custom_action_param": {
-            "count": "{黎瑟技能释放间隔}",
-            "nodes": [
-              "委托完成"
-            ]
-          }
+        "夜航60-TextWatcher": {
+          "time": "{黎瑟技能释放间隔}"
         }
       }
     },
@@ -316,13 +546,8 @@
         }
       ],
       "pipeline_override": {
-        "夜航60-检测是否完成委托": {
-          "custom_action_param": {
-            "count": "{水母技能释放间隔}",
-            "nodes": [
-              "委托完成"
-            ]
-          }
+        "夜航60-TextWatcher": {
+          "time": "{水母技能释放间隔}"
         }
       }
     }

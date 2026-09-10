@@ -1,17 +1,5 @@
 {
-  "夜航40-再接再厉": {
-    "recognition": "DirectHit",
-    "pre_delay": 0,
-    "action": "Custom",
-    "custom_action": "outnoder",
-    "custom_action_param": "再接再厉",
-    "post_delay": 0,
-    "next": [
-      "夜航40-失败计数"
-    ]
-  },
   "夜航40-下一把": {
-    "recognition": "DirectHit",
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
@@ -21,10 +9,17 @@
     },
     "post_delay": 0,
     "next": [
-      {
-        "name": "夜航40-回到加载",
-        "anchor": true
-      }
+      "[Anchor]夜航40-回到加载"
+    ]
+  },
+  "夜航40-再接再厉": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "outnoder",
+    "custom_action_param": "再接再厉",
+    "post_delay": 0,
+    "next": [
+      "[Anchor]夜航40-回到计数"
     ]
   },
   "夜航40-加载中": {
@@ -37,33 +32,24 @@
     ],
     "template": [
       "加载过程中百分号.png"
-    ],
-    "action": "DoNothing"
+    ]
   },
   "夜航40-加载中间过渡节点": {
-    "recognition": "DirectHit",
-    "action": "DoNothing",
     "post_delay": 1000,
     "focus": {
       "Node.Recognition.Succeeded": "(´-ω-`) 正在加载副本，稍等一下~"
     },
     "next": [
-      {
-        "name": "夜航40-加载中",
-        "jump_back": true
-      },
+      "[JumpBack]夜航40-加载中",
       "夜航40-检测是否成功进入副本"
     ]
   },
   "夜航40-启动": {
-    "recognition": "DirectHit",
-    "action": "DoNothing",
     "next": [
       "夜航40-回到主界面"
     ]
   },
   "夜航40-回到主界面": {
-    "recognition": "DirectHit",
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
@@ -77,42 +63,19 @@
     ]
   },
   "夜航40-失败后等待节点": {
-    "recognition": "DirectHit",
-    "action": "DoNothing",
     "post_delay": 1000
   },
-  "夜航40-失败计数": {
-    "recognition": "DirectHit",
-    "pre_delay": 0,
-    "action": "Custom",
-    "custom_action": "Count",
-    "custom_action_param": {
-      "id": "failed"
-    },
-    "anchor": {
-      "夜航40-回到计数": "夜航40-总计数"
-    },
-    "post_delay": 0,
-    "on_error": [
-      {
-        "name": "夜航40-回到计数",
-        "anchor": true
-      }
-    ]
-  },
-  "夜航40-寻找40": {
-    "recognition": "DirectHit",
+  "夜航40-寻找80": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
     "custom_action_param": "夜航-等级条上滑动",
     "post_delay": 1000,
     "next": [
-      "夜航40-点击40"
+      "夜航40-点击80"
     ]
   },
   "夜航40-寻路": {
-    "recognition": "DirectHit",
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "MacroPlayer",
@@ -125,14 +88,27 @@
       "Node.Recognition.Starting": "(ง •̀_•́)ง 自动寻路中，马上就到！"
     },
     "next": [
-      "夜航40-角色主控"
+      "夜航40-超时计时开始"
     ]
   },
-  "夜航40-总计数": {
-    "recognition": "DirectHit",
+  "夜航40-计数+1": {
     "pre_delay": 0,
     "action": "Custom",
-    "custom_action": "Count",
+    "custom_action": "CountAdd",
+    "custom_action_param": {
+      "id": "all",
+      "step": 1,
+      "target": 10
+    },
+    "post_delay": 0,
+    "next": [
+      "夜航40-计数检查"
+    ]
+  },
+  "夜航40-计数检查": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "CountCheck",
     "custom_action_param": {
       "id": "all",
       "target": 10
@@ -145,21 +121,33 @@
       "夜航40-输出信息节点2"
     ]
   },
-  "夜航40-成功计数": {
-    "recognition": "DirectHit",
+  "夜航40-成功+1": {
     "pre_delay": 0,
     "action": "Custom",
-    "custom_action": "Count",
+    "custom_action": "CountAdd",
     "custom_action_param": {
-      "id": "success"
+      "id": "success",
+      "step": 1
     },
     "post_delay": 0,
-    "on_error": [
-      "夜航40-总计数"
+    "next": [
+      "夜航40-计数+1"
+    ]
+  },
+  "夜航40-失败+1": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "CountAdd",
+    "custom_action_param": {
+      "id": "failed",
+      "step": 1
+    },
+    "post_delay": 0,
+    "next": [
+      "夜航40-超时处理"
     ]
   },
   "夜航40-放弃挑战": {
-    "recognition": "DirectHit",
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
@@ -173,7 +161,6 @@
     ]
   },
   "夜航40-检查超时": {
-    "recognition": "DirectHit",
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "CheckTimeout",
@@ -182,21 +169,21 @@
       "夜航40-角色主控"
     ],
     "on_error": [
-      "夜航40-超时处理"
+      "夜航40-失败+1"
     ]
   },
-  "夜航40-检测是否完成委托": {
-    "recognition": "DirectHit",
+  "夜航40-TextWatcher": {
     "pre_delay": 0,
     "action": "Custom",
-    "custom_action": "Looper",
+    "custom_action": "TextWatcher",
     "custom_action_param": {
-      "count": 40,
-      "nodes": [
-        "委托完成"
-      ]
+      "config": 1
     },
     "post_delay": 0,
+    "focus": {
+      "Node.Action.Succeeded": "TextWatcher: 检测到目标文本"
+    },
+    "time": 10,
     "next": [
       "夜航40-结束计时"
     ],
@@ -215,13 +202,11 @@
     "expected": [
       "驱离"
     ],
-    "action": "DoNothing",
     "next": [
-      "夜航40-超时计时开始"
+      "夜航40-寻路"
     ]
   },
-  "夜航40-点击40": {
-    "recognition": "DirectHit",
+  "夜航40-点击80": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
@@ -247,53 +232,38 @@
       "夜航40-等待退出节点"
     ]
   },
-  "夜航40-进入副本": {
-    "recognition": "DirectHit",
-    "pre_delay": 0,
-    "action": "Custom",
-    "custom_action": "outnoder",
-    "custom_action_param": "夜航手册进入副本流程",
-    "post_delay": 0,
-    "next": [
-      "夜航40-加载中间过渡节点"
-    ]
-  },
   "夜航40-等待退出节点": {
-    "recognition": "DirectHit",
-    "action": "DoNothing",
+    "anchor": {
+      "夜航40-回到计数": "夜航40-计数+1"
+    },
     "post_delay": 1000,
     "timeout": 100,
     "next": [
       "夜航40-再接再厉",
-      {
-        "name": "夜航40-失败后等待节点",
-        "jump_back": true
-      }
+      "[JumpBack]夜航40-失败后等待节点"
     ]
   },
   "夜航40-结束计时": {
-    "recognition": "DirectHit",
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "TimeoutReset",
     "post_delay": 0,
     "next": [
-      "夜航40-成功计数"
+      "夜航40-成功+1",
+      "夜航40-轮次+1"
     ]
   },
   "夜航40-角色主控": {
-    "recognition": "DirectHit",
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
     "custom_action_param": "黎瑟",
     "post_delay": 0,
     "next": [
-      "夜航40-检测是否完成委托"
+      "夜航40-TextWatcher"
     ]
   },
   "夜航40-超时处理": {
-    "recognition": "DirectHit",
     "pre_delay": 500,
     "action": "Custom",
     "custom_action": "outnoder",
@@ -307,28 +277,26 @@
     ]
   },
   "夜航40-超时计时开始": {
-    "recognition": "DirectHit",
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "TimeoutStart",
     "custom_action_param": {
-      "duration": 40
+      "duration": 60
     },
     "post_delay": 1000,
     "focus": {
       "Node.Recognition.Starting": "⏱ 超时倒计时开始"
     },
     "next": [
-      "夜航40-寻路"
+      "夜航40-角色主控"
     ]
   },
   "夜航40-输出信息节点1": {
-    "recognition": "DirectHit",
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "CountPrint",
     "custom_action_param": {
-      "msg": "夜航手册40已全部完成 失败{failed}次 成功{success}次"
+      "msg": "已全部完成 | 失败{failed}次 | 成功{success}次"
     },
     "post_delay": 0,
     "next": [
@@ -336,20 +304,28 @@
     ]
   },
   "夜航40-输出信息节点2": {
-    "recognition": "DirectHit",
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "CountPrint",
     "custom_action_param": {
-      "msg": "夜航手册40已完成{all}/{all_target}次 失败{failed}次 成功{success}次"
+      "msg": "已完成{all}/{all_target}次 | 失败{failed}次 | 成功{success}次"
     },
     "post_delay": 0,
     "next": [
       "夜航40-下一把"
     ]
   },
+  "夜航40-进入副本": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "outnoder",
+    "custom_action_param": "夜航手册进入副本流程",
+    "post_delay": 0,
+    "next": [
+      "夜航40-加载中间过渡节点"
+    ]
+  },
   "夜航40-进入夜航手册": {
-    "recognition": "DirectHit",
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
@@ -359,11 +335,10 @@
       "Node.Recognition.Succeeded": "进入夜航手册界面~"
     },
     "next": [
-      "夜航40-寻找40"
+      "夜航40-寻找80"
     ]
   },
   "夜航40-退出委托流程": {
-    "recognition": "DirectHit",
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
@@ -371,7 +346,6 @@
     "post_delay": 0
   },
   "夜航40-选择副本": {
-    "recognition": "DirectHit",
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
@@ -379,6 +353,102 @@
     "post_delay": 0,
     "next": [
       "夜航40-进入副本"
+    ]
+  },
+  "夜航40-轮次+1": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "CountAdd",
+    "custom_action_param": {
+      "id": "round",
+      "step": 1
+    },
+    "post_delay": 0,
+    "next": [
+      "夜航40-轮次比较"
+    ]
+  },
+  "夜航40-轮次比较": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "CountCheck",
+    "custom_action_param": {
+      "id": "round",
+      "target": 3
+    },
+    "post_delay": 0,
+    "next": [
+      "夜航40-轮次完成"
+    ],
+    "on_error": [
+      "夜航40-轮次信息"
+    ]
+  },
+  "夜航40-轮次信息": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "CountPrint",
+    "custom_action_param": {
+      "msg": "已完成{round}轮"
+    },
+    "post_delay": 0,
+    "next": [
+      "夜航40-未完成用户设定轮次"
+    ]
+  },
+  "夜航40-轮次选书": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "outnoder",
+    "custom_action_param": "不选书",
+    "post_delay": 0,
+    "next": [
+      "[Anchor]夜航40-回到挂机"
+    ]
+  },
+  "夜航40-未完成用户设定轮次": {
+    "recognition": "OCR",
+    "expected": [
+      "继续挑战"
+    ],
+    "action": "Click",
+    "anchor": {
+      "夜航40-回到挂机": "夜航40-TextWatcher"
+    },
+    "next": [
+      "夜航40-轮次选书"
+    ]
+  },
+  "夜航40-轮次完成": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "CountPrint",
+    "custom_action_param": {
+      "msg": "用户设定{round_target}轮次已全部完成"
+    },
+    "post_delay": 0,
+    "next": [
+      "夜航40-清理轮次"
+    ]
+  },
+  "夜航40-清理轮次": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "CountReset",
+    "custom_action_param": "round",
+    "post_delay": 0,
+    "next": [
+      "夜航40-满足用户设定轮次"
+    ]
+  },
+  "夜航40-满足用户设定轮次": {
+    "recognition": "OCR",
+    "expected": [
+      "撤退"
+    ],
+    "action": "Click",
+    "next": [
+      "夜航40-成功+1"
     ]
   }
 }

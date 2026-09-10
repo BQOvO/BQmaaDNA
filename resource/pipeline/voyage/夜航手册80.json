@@ -19,7 +19,7 @@
     "custom_action_param": "再接再厉",
     "post_delay": 0,
     "next": [
-      "夜航80-失败计数"
+      "[Anchor]夜航80-回到计数"
     ]
   },
   "夜航80-加载中": {
@@ -65,21 +65,6 @@
   "夜航80-失败后等待节点": {
     "post_delay": 1000
   },
-  "夜航80-失败计数": {
-    "pre_delay": 0,
-    "action": "Custom",
-    "custom_action": "Count",
-    "custom_action_param": {
-      "id": "failed"
-    },
-    "anchor": {
-      "夜航80-回到计数": "夜航80-总计数"
-    },
-    "post_delay": 0,
-    "on_error": [
-      "[Anchor]夜航80-回到计数"
-    ]
-  },
   "夜航80-寻找80": {
     "pre_delay": 0,
     "action": "Custom",
@@ -103,13 +88,27 @@
       "Node.Recognition.Starting": "(ง •̀_•́)ง 自动寻路中，马上就到！"
     },
     "next": [
-      "夜航80-角色主控"
+      "夜航80-超时计时开始"
     ]
   },
-  "夜航80-总计数": {
+  "夜航80-计数+1": {
     "pre_delay": 0,
     "action": "Custom",
-    "custom_action": "Count",
+    "custom_action": "CountAdd",
+    "custom_action_param": {
+      "id": "all",
+      "step": 1,
+      "target": 10
+    },
+    "post_delay": 0,
+    "next": [
+      "夜航80-计数检查"
+    ]
+  },
+  "夜航80-计数检查": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "CountCheck",
     "custom_action_param": {
       "id": "all",
       "target": 10
@@ -122,16 +121,30 @@
       "夜航80-输出信息节点2"
     ]
   },
-  "夜航80-成功计数": {
+  "夜航80-成功+1": {
     "pre_delay": 0,
     "action": "Custom",
-    "custom_action": "Count",
+    "custom_action": "CountAdd",
     "custom_action_param": {
-      "id": "success"
+      "id": "success",
+      "step": 1
     },
     "post_delay": 0,
-    "on_error": [
-      "夜航80-总计数"
+    "next": [
+      "夜航80-计数+1"
+    ]
+  },
+  "夜航80-失败+1": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "CountAdd",
+    "custom_action_param": {
+      "id": "failed",
+      "step": 1
+    },
+    "post_delay": 0,
+    "next": [
+      "夜航80-超时处理"
     ]
   },
   "夜航80-放弃挑战": {
@@ -156,20 +169,21 @@
       "夜航80-角色主控"
     ],
     "on_error": [
-      "夜航80-超时处理"
+      "夜航80-失败+1"
     ]
   },
-  "夜航80-检测是否完成委托": {
+  "夜航80-TextWatcher": {
     "pre_delay": 0,
     "action": "Custom",
-    "custom_action": "Looper",
+    "custom_action": "TextWatcher",
     "custom_action_param": {
-      "count": 20,
-      "nodes": [
-        "委托完成"
-      ]
+      "config": 1
     },
     "post_delay": 0,
+    "focus": {
+      "Node.Action.Succeeded": "TextWatcher: 检测到目标文本"
+    },
+    "time": 10,
     "next": [
       "夜航80-结束计时"
     ],
@@ -189,7 +203,7 @@
       "避险"
     ],
     "next": [
-      "夜航80-超时计时开始"
+      "夜航80-寻路"
     ]
   },
   "夜航80-点击80": {
@@ -219,6 +233,9 @@
     ]
   },
   "夜航80-等待退出节点": {
+    "anchor": {
+      "夜航80-回到计数": "夜航80-计数+1"
+    },
     "post_delay": 1000,
     "timeout": 100,
     "next": [
@@ -232,7 +249,8 @@
     "custom_action": "TimeoutReset",
     "post_delay": 0,
     "next": [
-      "夜航80-成功计数"
+      "夜航80-成功+1",
+      "夜航80-轮次+1"
     ]
   },
   "夜航80-角色主控": {
@@ -242,7 +260,7 @@
     "custom_action_param": "黎瑟",
     "post_delay": 0,
     "next": [
-      "夜航80-检测是否完成委托"
+      "夜航80-TextWatcher"
     ]
   },
   "夜航80-超时处理": {
@@ -270,7 +288,7 @@
       "Node.Recognition.Starting": "⏱ 超时倒计时开始"
     },
     "next": [
-      "夜航80-寻路"
+      "夜航80-角色主控"
     ]
   },
   "夜航80-输出信息节点1": {
@@ -278,7 +296,7 @@
     "action": "Custom",
     "custom_action": "CountPrint",
     "custom_action_param": {
-      "msg": "夜航手册80已全部完成 失败{failed}次 成功{success}次"
+      "msg": "已全部完成 | 失败{failed}次 | 成功{success}次"
     },
     "post_delay": 0,
     "next": [
@@ -290,7 +308,7 @@
     "action": "Custom",
     "custom_action": "CountPrint",
     "custom_action_param": {
-      "msg": "夜航手册80已完成{all}/{all_target}次 失败{failed}次 成功{success}次"
+      "msg": "已完成{all}/{all_target}次 | 失败{failed}次 | 成功{success}次"
     },
     "post_delay": 0,
     "next": [
@@ -337,37 +355,100 @@
       "夜航80-进入副本"
     ]
   },
-  "夜航80-检测轮次": {
+  "夜航80-轮次+1": {
+    "pre_delay": 0,
     "action": "Custom",
-    "custom_action": "RoundTracker",
-    "focus": {
-      "Node.Action.Starting": "正在检测轮次变化..."
+    "custom_action": "CountAdd",
+    "custom_action_param": {
+      "id": "round",
+      "step": 1
     },
+    "post_delay": 0,
     "next": [
-      "夜航80-重置超时"
+      "夜航80-轮次比较"
+    ]
+  },
+  "夜航80-轮次比较": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "CountCheck",
+    "custom_action_param": {
+      "id": "round",
+      "target": 3
+    },
+    "post_delay": 0,
+    "next": [
+      "夜航80-轮次完成"
     ],
     "on_error": [
-      "夜航80-检测是否完成委托"
+      "夜航80-轮次信息"
     ]
   },
-  "夜航80-重置超时": {
+  "夜航80-轮次信息": {
+    "pre_delay": 0,
     "action": "Custom",
-    "custom_action": "TimeoutReset",
-    "next": [
-      "夜航80-重新计时"
-    ]
-  },
-  "夜航80-重新计时": {
-    "action": "Custom",
-    "custom_action": "TimeoutStart",
+    "custom_action": "CountPrint",
     "custom_action_param": {
-      "duration": 60
+      "msg": "已完成{round}轮"
     },
-    "focus": {
-      "Node.Action.Starting": "⏱ 重新计时"
+    "post_delay": 0,
+    "next": [
+      "夜航80-未完成用户设定轮次"
+    ]
+  },
+  "夜航80-轮次选书": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "outnoder",
+    "custom_action_param": "不选书",
+    "post_delay": 0,
+    "next": [
+      "[Anchor]夜航80-回到挂机"
+    ]
+  },
+  "夜航80-未完成用户设定轮次": {
+    "recognition": "OCR",
+    "expected": [
+      "继续挑战"
+    ],
+    "action": "Click",
+    "anchor": {
+      "夜航80-回到挂机": "夜航80-TextWatcher"
     },
     "next": [
-      "夜航80-检测是否完成委托"
+      "夜航80-轮次选书"
+    ]
+  },
+  "夜航80-轮次完成": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "CountPrint",
+    "custom_action_param": {
+      "msg": "用户设定{round_target}轮次已全部完成"
+    },
+    "post_delay": 0,
+    "next": [
+      "夜航80-清理轮次"
+    ]
+  },
+  "夜航80-清理轮次": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "CountReset",
+    "custom_action_param": "round",
+    "post_delay": 0,
+    "next": [
+      "夜航80-满足用户设定轮次"
+    ]
+  },
+  "夜航80-满足用户设定轮次": {
+    "recognition": "OCR",
+    "expected": [
+      "撤退"
+    ],
+    "action": "Click",
+    "next": [
+      "夜航80-成功+1"
     ]
   }
 }

@@ -3,7 +3,7 @@
     {
       "name": "夜航手册40",
       "entry": "夜航40-启动",
-      "description": "resource/descs/nightguide/40.md",
+      "description": "【夜航手册】\n\n1.在执行其他任务前可以先执行一下自动调设置任务，确保游戏为挂机所需的设置\n\n2.请合理配置超时时间\n\n3.请不要在任务执行过程中手动操作",
       "option": [
         "夜航40副本选择",
         "夜航40加成书选择",
@@ -17,46 +17,96 @@
     "夜航40副本选择": {
       "label": "副本选择",
       "type": "select",
-      "default_case": "第一个",
+      "default_case": "第一个（凛霜 游击秽兽）",
       "description": "选择第几个副本进行刷取",
       "cases": [
         {
-          "name": "第一个",
+          "name": "第一个（凛霜 游击秽兽）",
           "pipeline_override": {
             "夜航40-选择副本": {
               "custom_action_param": "夜航-40-1"
+            },
+            "夜航40-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航40-结束计时": {
+              "next": [
+                "夜航40-成功+1"
+              ]
             }
           }
         },
         {
-          "name": "第二个",
+          "name": "第二个（复仇 飘浮秽兽Ⅱ）",
           "pipeline_override": {
             "夜航40-选择副本": {
               "custom_action_param": "夜航-40-2"
+            },
+            "夜航40-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航40-结束计时": {
+              "next": [
+                "夜航40-成功+1"
+              ]
             }
           }
         },
         {
-          "name": "第三个",
+          "name": "第三个（掠影 灼心秽兽）",
           "pipeline_override": {
             "夜航40-选择副本": {
               "custom_action_param": "夜航-40-3"
+            },
+            "夜航40-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航40-结束计时": {
+              "next": [
+                "夜航40-成功+1"
+              ]
             }
           }
         },
         {
-          "name": "第四个",
+          "name": "第四个（霹雳 暴徒秽兽）",
           "pipeline_override": {
             "夜航40-选择副本": {
               "custom_action_param": "夜航-40-4"
+            },
+            "夜航40-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航40-结束计时": {
+              "next": [
+                "夜航40-成功+1"
+              ]
             }
           }
         },
         {
-          "name": "第五个",
+          "name": "第五个（复仇 疾冲秽兽）",
           "pipeline_override": {
             "夜航40-选择副本": {
               "custom_action_param": "夜航-40-5"
+            },
+            "夜航40-检测是否成功进入副本": {
+              "expected": [
+                "驱离"
+              ]
+            },
+            "夜航40-结束计时": {
+              "next": [
+                "夜航40-成功+1"
+              ]
             }
           }
         }
@@ -77,6 +127,9 @@
             },
             "再次进行选书": {
               "custom_action_param": "不选书"
+            },
+            "夜航40-轮次选书": {
+              "custom_action_param": "不选书"
             }
           }
         },
@@ -88,6 +141,9 @@
               "custom_action_param": "绿书"
             },
             "再次进行选书": {
+              "custom_action_param": "绿书"
+            },
+            "夜航40-轮次选书": {
               "custom_action_param": "绿书"
             }
           }
@@ -101,6 +157,9 @@
             },
             "再次进行选书": {
               "custom_action_param": "蓝书"
+            },
+            "夜航40-轮次选书": {
+              "custom_action_param": "蓝书"
             }
           }
         },
@@ -113,6 +172,9 @@
             },
             "再次进行选书": {
               "custom_action_param": "紫书"
+            },
+            "夜航40-轮次选书": {
+              "custom_action_param": "紫书"
             }
           }
         },
@@ -124,6 +186,9 @@
               "custom_action_param": "金书"
             },
             "再次进行选书": {
+              "custom_action_param": "金书"
+            },
+            "夜航40-轮次选书": {
               "custom_action_param": "金书"
             }
           }
@@ -161,7 +226,7 @@
         }
       ],
       "pipeline_override": {
-        "夜航40-总计数": {
+        "夜航40-计数检查": {
           "custom_action_param": {
             "id": "all",
             "target": "{刷取次数}"
@@ -211,13 +276,8 @@
         }
       ],
       "pipeline_override": {
-        "夜航40-检测是否完成委托": {
-          "custom_action_param": {
-            "count": "{黎瑟技能释放间隔}",
-            "nodes": [
-              "委托完成"
-            ]
-          }
+        "夜航40-TextWatcher": {
+          "time": "{黎瑟技能释放间隔}"
         }
       }
     },
@@ -234,13 +294,8 @@
         }
       ],
       "pipeline_override": {
-        "夜航40-检测是否完成委托": {
-          "custom_action_param": {
-            "count": "{水母技能释放间隔}",
-            "nodes": [
-              "委托完成"
-            ]
-          }
+        "夜航40-TextWatcher": {
+          "time": "{水母技能释放间隔}"
         }
       }
     }

@@ -3,7 +3,7 @@
     {
       "name": "夜航手册65",
       "entry": "夜航65-启动",
-      "description": "resource/descs/nightguide/65.md",
+      "description": "【夜航手册】\n\n1.在执行其他任务前可以先执行一下自动调设置任务，确保游戏为挂机所需的设置\n\n2.请合理配置超时时间\n\n3.请不要在任务执行过程中手动操作",
       "option": [
         "夜航65副本选择",
         "夜航65加成书选择",
@@ -17,107 +17,218 @@
     "夜航65副本选择": {
       "label": "副本选择",
       "type": "select",
-      "default_case": "第一个",
+      "default_case": "第一个（霜狱 野蜂暗箭）",
       "description": "选择第几个副本进行刷取",
       "cases": [
         {
-          "name": "第一个",
-          "option": [
-            "夜航65轮次选择"
-          ],
+          "name": "第一个（霜狱 野蜂暗箭）",
           "pipeline_override": {
             "夜航65-选择副本": {
               "custom_action_param": "夜航-65-1"
+            },
+            "夜航65-检测是否成功进入副本": {
+              "expected": [
+                "扼守"
+              ]
+            },
+            "夜航65-结束计时": {
+              "next": [
+                "夜航65-轮次+1"
+              ]
             }
-          }
-        },
-        {
-          "name": "第二个",
+          },
           "option": [
             "夜航65轮次选择"
-          ],
+          ]
+        },
+        {
+          "name": "第二个（浴血 野蜂利刃）",
           "pipeline_override": {
             "夜航65-选择副本": {
               "custom_action_param": "夜航-65-2"
+            },
+            "夜航65-检测是否成功进入副本": {
+              "expected": [
+                "扼守"
+              ]
+            },
+            "夜航65-结束计时": {
+              "next": [
+                "夜航65-轮次+1"
+              ]
             }
-          }
-        },
-        {
-          "name": "第三个",
+          },
           "option": [
             "夜航65轮次选择"
-          ],
+          ]
+        },
+        {
+          "name": "第三个（浴血 野蜂密探）",
           "pipeline_override": {
             "夜航65-选择副本": {
               "custom_action_param": "夜航-65-3"
+            },
+            "夜航65-检测是否成功进入副本": {
+              "expected": [
+                "扼守"
+              ]
+            },
+            "夜航65-结束计时": {
+              "next": [
+                "夜航65-轮次+1"
+              ]
             }
-          }
-        },
-        {
-          "name": "第四个",
+          },
           "option": [
             "夜航65轮次选择"
-          ],
+          ]
+        },
+        {
+          "name": "第四个（掠影 野蜂暗箭）",
           "pipeline_override": {
             "夜航65-选择副本": {
               "custom_action_param": "夜航-65-4"
+            },
+            "夜航65-检测是否成功进入副本": {
+              "expected": [
+                "扼守"
+              ]
+            },
+            "夜航65-结束计时": {
+              "next": [
+                "夜航65-轮次+1"
+              ]
             }
-          }
-        },
-        {
-          "name": "第五个",
+          },
           "option": [
             "夜航65轮次选择"
-          ],
+          ]
+        },
+        {
+          "name": "第五个（守护 野蜂利刃）",
           "pipeline_override": {
             "夜航65-选择副本": {
               "custom_action_param": "夜航-65-5"
+            },
+            "夜航65-检测是否成功进入副本": {
+              "expected": [
+                "扼守"
+              ]
+            },
+            "夜航65-结束计时": {
+              "next": [
+                "夜航65-轮次+1"
+              ]
             }
-          }
-        },
-        {
-          "name": "第六个",
+          },
           "option": [
             "夜航65轮次选择"
-          ],
+          ]
+        },
+        {
+          "name": "第六个（守护 野蜂暗箭）",
           "pipeline_override": {
             "夜航65-选择副本": {
               "custom_action_param": "夜航-65-6"
+            },
+            "夜航65-检测是否成功进入副本": {
+              "expected": [
+                "扼守"
+              ]
+            },
+            "夜航65-结束计时": {
+              "next": [
+                "夜航65-轮次+1"
+              ]
             }
-          }
-        },
-        {
-          "name": "第七个",
+          },
           "option": [
             "夜航65轮次选择"
-          ],
+          ]
+        },
+        {
+          "name": "第七个（转雷 野蜂密探）",
           "pipeline_override": {
             "夜航65-选择副本": {
               "custom_action_param": "夜航-65-7"
+            },
+            "夜航65-检测是否成功进入副本": {
+              "expected": [
+                "扼守"
+              ]
+            },
+            "夜航65-结束计时": {
+              "next": [
+                "夜航65-轮次+1"
+              ]
             }
-          }
-        },
-        {
-          "name": "第八个",
+          },
           "option": [
             "夜航65轮次选择"
-          ],
+          ]
+        },
+        {
+          "name": "第八个（浴血 野蜂暗箭）",
           "pipeline_override": {
             "夜航65-选择副本": {
               "custom_action_param": "夜航-65-8"
+            },
+            "夜航65-检测是否成功进入副本": {
+              "expected": [
+                "扼守"
+              ]
+            },
+            "夜航65-结束计时": {
+              "next": [
+                "夜航65-轮次+1"
+              ]
             }
-          }
-        },
-        {
-          "name": "第九个",
+          },
           "option": [
             "夜航65轮次选择"
-          ],
+          ]
+        },
+        {
+          "name": "第九个（掠影 野蜂利刃）",
           "pipeline_override": {
             "夜航65-选择副本": {
               "custom_action_param": "夜航-65-9"
+            },
+            "夜航65-检测是否成功进入副本": {
+              "expected": [
+                "扼守"
+              ]
+            },
+            "夜航65-结束计时": {
+              "next": [
+                "夜航65-轮次+1"
+              ]
             }
-          }
+          },
+          "option": [
+            "夜航65轮次选择"
+          ]
+        },
+        {
+          "name": "第十个（霜狱 野蜂密探）",
+          "pipeline_override": {
+            "夜航65-选择副本": {
+              "custom_action_param": "夜航-65-10"
+            },
+            "夜航65-检测是否成功进入副本": {
+              "expected": [
+                "扼守"
+              ]
+            },
+            "夜航65-结束计时": {
+              "next": [
+                "夜航65-轮次+1"
+              ]
+            }
+          },
+          "option": [
+            "夜航65轮次选择"
+          ]
         }
       ]
     },
@@ -136,6 +247,9 @@
             },
             "再次进行选书": {
               "custom_action_param": "不选书"
+            },
+            "夜航65-轮次选书": {
+              "custom_action_param": "不选书"
             }
           }
         },
@@ -147,6 +261,9 @@
               "custom_action_param": "绿书"
             },
             "再次进行选书": {
+              "custom_action_param": "绿书"
+            },
+            "夜航65-轮次选书": {
               "custom_action_param": "绿书"
             }
           }
@@ -160,6 +277,9 @@
             },
             "再次进行选书": {
               "custom_action_param": "蓝书"
+            },
+            "夜航65-轮次选书": {
+              "custom_action_param": "蓝书"
             }
           }
         },
@@ -172,6 +292,9 @@
             },
             "再次进行选书": {
               "custom_action_param": "紫书"
+            },
+            "夜航65-轮次选书": {
+              "custom_action_param": "紫书"
             }
           }
         },
@@ -183,6 +306,9 @@
               "custom_action_param": "金书"
             },
             "再次进行选书": {
+              "custom_action_param": "金书"
+            },
+            "夜航65-轮次选书": {
               "custom_action_param": "金书"
             }
           }
@@ -205,11 +331,6 @@
           "custom_action_param": {
             "duration": "{超时时间}"
           }
-        },
-        "夜航65-重新计时": {
-          "custom_action_param": {
-            "duration": "{超时时间}"
-          }
         }
       }
     },
@@ -225,7 +346,7 @@
         }
       ],
       "pipeline_override": {
-        "夜航65-总计数": {
+        "夜航65-计数检查": {
           "custom_action_param": {
             "id": "all",
             "target": "{刷取次数}"
@@ -275,13 +396,8 @@
         }
       ],
       "pipeline_override": {
-        "夜航65-检测是否完成委托": {
-          "custom_action_param": {
-            "count": "{黎瑟技能释放间隔}",
-            "nodes": [
-              "委托完成"
-            ]
-          }
+        "夜航65-TextWatcher": {
+          "time": "{黎瑟技能释放间隔}"
         }
       }
     },
@@ -298,13 +414,8 @@
         }
       ],
       "pipeline_override": {
-        "夜航65-检测是否完成委托": {
-          "custom_action_param": {
-            "count": "{水母技能释放间隔}",
-            "nodes": [
-              "委托完成"
-            ]
-          }
+        "夜航65-TextWatcher": {
+          "time": "{水母技能释放间隔}"
         }
       }
     },
@@ -318,12 +429,13 @@
           "description": "输入目标轮次",
           "default": "1",
           "pipeline_type": "int",
-          "verify": "^(?:[1-9]|[1-9]\\d)$"
+          "verify": "^(?:[1-9]|[1-9]\\d|100)$"
         }
       ],
       "pipeline_override": {
-        "夜航65-检测轮次": {
+        "夜航65-轮次比较": {
           "custom_action_param": {
+            "id": "round",
             "target": "{轮次}"
           }
         }

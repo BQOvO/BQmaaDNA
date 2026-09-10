@@ -1,28 +1,28 @@
 {
-  "夜航75-下一把": {
+  "夜航50-下一把": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
     "custom_action_param": "委托下一把流程",
     "anchor": {
-      "夜航75-回到加载": "夜航75-加载中间过渡节点"
+      "夜航50-回到加载": "夜航50-加载中间过渡节点"
     },
     "post_delay": 0,
     "next": [
-      "[Anchor]夜航75-回到加载"
+      "[Anchor]夜航50-回到加载"
     ]
   },
-  "夜航75-再接再厉": {
+  "夜航50-再接再厉": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
     "custom_action_param": "再接再厉",
     "post_delay": 0,
     "next": [
-      "[Anchor]夜航75-回到计数"
+      "[Anchor]夜航50-回到计数"
     ]
   },
-  "夜航75-加载中": {
+  "夜航50-加载中": {
     "recognition": "TemplateMatch",
     "roi": [
       1184,
@@ -34,22 +34,22 @@
       "加载过程中百分号.png"
     ]
   },
-  "夜航75-加载中间过渡节点": {
+  "夜航50-加载中间过渡节点": {
     "post_delay": 1000,
     "focus": {
       "Node.Recognition.Succeeded": "(´-ω-`) 正在加载副本，稍等一下~"
     },
     "next": [
-      "[JumpBack]夜航75-加载中",
-      "夜航75-检测是否成功进入副本"
+      "[JumpBack]夜航50-加载中",
+      "夜航50-检测是否成功进入副本"
     ]
   },
-  "夜航75-启动": {
+  "夜航50-启动": {
     "next": [
-      "夜航75-回到主界面"
+      "夜航50-回到主界面"
     ]
   },
-  "夜航75-回到主界面": {
+  "夜航50-回到主界面": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
@@ -59,28 +59,28 @@
       "Node.Recognition.Starting": "正在返回主界面..."
     },
     "next": [
-      "夜航75-进入夜航手册"
+      "夜航50-进入夜航手册"
     ]
   },
-  "夜航75-失败后等待节点": {
+  "夜航50-失败后等待节点": {
     "post_delay": 1000
   },
-  "夜航75-寻找80": {
+  "夜航50-寻找80": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
-    "custom_action_param": "夜航-等级条下滑动",
+    "custom_action_param": "夜航-等级条上滑动",
     "post_delay": 1000,
     "next": [
-      "夜航75-点击80"
+      "夜航50-点击80"
     ]
   },
-  "夜航75-寻路": {
+  "夜航50-寻路": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "MacroPlayer",
     "custom_action_param": {
-      "file": "夜航手册75/夜航手册75.macro"
+      "file": "夜航手册50/夜航手册50.macro"
     },
     "post_delay": 0,
     "focus": {
@@ -88,10 +88,10 @@
       "Node.Recognition.Starting": "(ง •̀_•́)ง 自动寻路中，马上就到！"
     },
     "next": [
-      "夜航75-超时计时开始"
+      "夜航50-超时计时开始"
     ]
   },
-  "夜航75-计数+1": {
+  "夜航50-计数+1": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "CountAdd",
@@ -102,10 +102,10 @@
     },
     "post_delay": 0,
     "next": [
-      "夜航75-计数检查"
+      "夜航50-计数检查"
     ]
   },
-  "夜航75-计数检查": {
+  "夜航50-计数检查": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "CountCheck",
@@ -115,13 +115,13 @@
     },
     "post_delay": 0,
     "next": [
-      "夜航75-输出信息节点1"
+      "夜航50-输出信息节点1"
     ],
     "on_error": [
-      "夜航75-输出信息节点2"
+      "夜航50-输出信息节点2"
     ]
   },
-  "夜航75-成功+1": {
+  "夜航50-成功+1": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "CountAdd",
@@ -131,10 +131,10 @@
     },
     "post_delay": 0,
     "next": [
-      "夜航75-计数+1"
+      "夜航50-计数+1"
     ]
   },
-  "夜航75-失败+1": {
+  "夜航50-失败+1": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "CountAdd",
@@ -144,10 +144,10 @@
     },
     "post_delay": 0,
     "next": [
-      "夜航75-超时处理"
+      "夜航50-超时处理"
     ]
   },
-  "夜航75-放弃挑战": {
+  "夜航50-放弃挑战": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
@@ -157,22 +157,22 @@
       "Node.Recognition.Starting": "正在退出当前副本..."
     },
     "next": [
-      "夜航75-确定退出"
+      "夜航50-确定退出"
     ]
   },
-  "夜航75-检查超时": {
+  "夜航50-检查超时": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "CheckTimeout",
     "post_delay": 0,
     "next": [
-      "夜航75-角色主控"
+      "夜航50-角色主控"
     ],
     "on_error": [
-      "夜航75-失败+1"
+      "夜航50-失败+1"
     ]
   },
-  "夜航75-TextWatcher": {
+  "夜航50-TextWatcher": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "TextWatcher",
@@ -185,13 +185,13 @@
     },
     "time": 10,
     "next": [
-      "夜航75-结束计时"
+      "夜航50-结束计时"
     ],
     "on_error": [
-      "夜航75-检查超时"
+      "夜航50-检查超时"
     ]
   },
-  "夜航75-检测是否成功进入副本": {
+  "夜航50-检测是否成功进入副本": {
     "recognition": "OCR",
     "roi": [
       24,
@@ -203,20 +203,20 @@
       "驱离"
     ],
     "next": [
-      "夜航75-寻路"
+      "夜航50-寻路"
     ]
   },
-  "夜航75-点击80": {
+  "夜航50-点击80": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
-    "custom_action_param": "夜航-75",
+    "custom_action_param": "夜航-50",
     "post_delay": 1000,
     "next": [
-      "夜航75-选择副本"
+      "夜航50-选择副本"
     ]
   },
-  "夜航75-确定退出": {
+  "夜航50-确定退出": {
     "recognition": "OCR",
     "roi": [
       737,
@@ -229,41 +229,41 @@
     ],
     "action": "Click",
     "next": [
-      "夜航75-等待退出节点"
+      "夜航50-等待退出节点"
     ]
   },
-  "夜航75-等待退出节点": {
+  "夜航50-等待退出节点": {
     "anchor": {
-      "夜航75-回到计数": "夜航75-计数+1"
+      "夜航50-回到计数": "夜航50-计数+1"
     },
     "post_delay": 1000,
     "timeout": 100,
     "next": [
-      "夜航75-再接再厉",
-      "[JumpBack]夜航75-失败后等待节点"
+      "夜航50-再接再厉",
+      "[JumpBack]夜航50-失败后等待节点"
     ]
   },
-  "夜航75-结束计时": {
+  "夜航50-结束计时": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "TimeoutReset",
     "post_delay": 0,
     "next": [
-      "夜航75-成功+1",
-      "夜航75-轮次+1"
+      "夜航50-成功+1",
+      "夜航50-轮次+1"
     ]
   },
-  "夜航75-角色主控": {
+  "夜航50-角色主控": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
     "custom_action_param": "黎瑟",
     "post_delay": 0,
     "next": [
-      "夜航75-TextWatcher"
+      "夜航50-TextWatcher"
     ]
   },
-  "夜航75-超时处理": {
+  "夜航50-超时处理": {
     "pre_delay": 500,
     "action": "Custom",
     "custom_action": "outnoder",
@@ -273,10 +273,10 @@
       "Node.Recognition.Succeeded": "(╥﹏╥) 居然超时了..."
     },
     "next": [
-      "夜航75-放弃挑战"
+      "夜航50-放弃挑战"
     ]
   },
-  "夜航75-超时计时开始": {
+  "夜航50-超时计时开始": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "TimeoutStart",
@@ -288,10 +288,10 @@
       "Node.Recognition.Starting": "⏱ 超时倒计时开始"
     },
     "next": [
-      "夜航75-角色主控"
+      "夜航50-角色主控"
     ]
   },
-  "夜航75-输出信息节点1": {
+  "夜航50-输出信息节点1": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "CountPrint",
@@ -300,10 +300,10 @@
     },
     "post_delay": 0,
     "next": [
-      "夜航75-退出委托流程"
+      "夜航50-退出委托流程"
     ]
   },
-  "夜航75-输出信息节点2": {
+  "夜航50-输出信息节点2": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "CountPrint",
@@ -312,20 +312,20 @@
     },
     "post_delay": 0,
     "next": [
-      "夜航75-下一把"
+      "夜航50-下一把"
     ]
   },
-  "夜航75-进入副本": {
+  "夜航50-进入副本": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
     "custom_action_param": "夜航手册进入副本流程",
     "post_delay": 0,
     "next": [
-      "夜航75-加载中间过渡节点"
+      "夜航50-加载中间过渡节点"
     ]
   },
-  "夜航75-进入夜航手册": {
+  "夜航50-进入夜航手册": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
@@ -335,27 +335,27 @@
       "Node.Recognition.Succeeded": "进入夜航手册界面~"
     },
     "next": [
-      "夜航75-寻找80"
+      "夜航50-寻找80"
     ]
   },
-  "夜航75-退出委托流程": {
+  "夜航50-退出委托流程": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
     "custom_action_param": "退出委托",
     "post_delay": 0
   },
-  "夜航75-选择副本": {
+  "夜航50-选择副本": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
-    "custom_action_param": "夜航-75-1",
+    "custom_action_param": "夜航-50-1",
     "post_delay": 0,
     "next": [
-      "夜航75-进入副本"
+      "夜航50-进入副本"
     ]
   },
-  "夜航75-轮次+1": {
+  "夜航50-轮次+1": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "CountAdd",
@@ -365,10 +365,10 @@
     },
     "post_delay": 0,
     "next": [
-      "夜航75-轮次比较"
+      "夜航50-轮次比较"
     ]
   },
-  "夜航75-轮次比较": {
+  "夜航50-轮次比较": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "CountCheck",
@@ -378,13 +378,13 @@
     },
     "post_delay": 0,
     "next": [
-      "夜航75-轮次完成"
+      "夜航50-轮次完成"
     ],
     "on_error": [
-      "夜航75-轮次信息"
+      "夜航50-轮次信息"
     ]
   },
-  "夜航75-轮次信息": {
+  "夜航50-轮次信息": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "CountPrint",
@@ -393,33 +393,33 @@
     },
     "post_delay": 0,
     "next": [
-      "夜航75-未完成用户设定轮次"
+      "夜航50-未完成用户设定轮次"
     ]
   },
-  "夜航75-轮次选书": {
+  "夜航50-轮次选书": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "outnoder",
     "custom_action_param": "不选书",
     "post_delay": 0,
     "next": [
-      "[Anchor]夜航75-回到挂机"
+      "[Anchor]夜航50-回到挂机"
     ]
   },
-  "夜航75-未完成用户设定轮次": {
+  "夜航50-未完成用户设定轮次": {
     "recognition": "OCR",
     "expected": [
       "继续挑战"
     ],
     "action": "Click",
     "anchor": {
-      "夜航75-回到挂机": "夜航75-TextWatcher"
+      "夜航50-回到挂机": "夜航50-TextWatcher"
     },
     "next": [
-      "夜航75-轮次选书"
+      "夜航50-轮次选书"
     ]
   },
-  "夜航75-轮次完成": {
+  "夜航50-轮次完成": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "CountPrint",
@@ -428,27 +428,27 @@
     },
     "post_delay": 0,
     "next": [
-      "夜航75-清理轮次"
+      "夜航50-清理轮次"
     ]
   },
-  "夜航75-清理轮次": {
+  "夜航50-清理轮次": {
     "pre_delay": 0,
     "action": "Custom",
     "custom_action": "CountReset",
     "custom_action_param": "round",
     "post_delay": 0,
     "next": [
-      "夜航75-满足用户设定轮次"
+      "夜航50-满足用户设定轮次"
     ]
   },
-  "夜航75-满足用户设定轮次": {
+  "夜航50-满足用户设定轮次": {
     "recognition": "OCR",
     "expected": [
       "撤退"
     ],
     "action": "Click",
     "next": [
-      "夜航75-成功+1"
+      "夜航50-成功+1"
     ]
   }
 }
