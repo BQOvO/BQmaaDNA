@@ -1,0 +1,1 @@
+ fly{wait(1000), repeat(5)};

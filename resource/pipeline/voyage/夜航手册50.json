@@ -80,12 +80,116 @@
     "action": "Custom",
     "custom_action": "MacroPlayer",
     "custom_action_param": {
-      "file": "夜航手册50/夜航手册50.macro"
+      "file": "夜航手册50/夜航手册50-侧转弯.macro"
     },
     "post_delay": 0,
     "focus": {
       "Node.Action.Succeeded": "到达挂机点，开刷！",
-      "Node.Recognition.Starting": "(ง •̀_•́)ง 自动寻路中，马上就到！"
+      "Node.Recognition.Starting": "(ง •̀_•́)ง 寻路中，马上就到！"
+    },
+    "next": [
+      "夜航50-超时计时开始"
+    ]
+  },
+  "夜航50-检测地图-侧转弯": {
+    "recognition": "TemplateMatch",
+    "roi": [
+      156,
+      122,
+      967,
+      513
+    ],
+    "template": [
+      "night50map/侧转弯.png"
+    ],
+    "next": [
+      "夜航50-寻路"
+    ],
+    "on_error": [
+      "夜航50-检测地图-前方1"
+    ]
+  },
+  "夜航50-检测地图-前方1": {
+    "recognition": "TemplateMatch",
+    "roi": [
+      156,
+      122,
+      967,
+      513
+    ],
+    "template": [
+      "night50map/前方1.png"
+    ],
+    "next": [
+      "夜航50-寻路-3飞"
+    ],
+    "on_error": [
+      "夜航50-检测地图-前方2"
+    ]
+  },
+  "夜航50-检测地图-前方2": {
+    "recognition": "TemplateMatch",
+    "roi": [
+      156,
+      122,
+      967,
+      513
+    ],
+    "template": [
+      "night50map/前方2.png"
+    ],
+    "next": [
+      "夜航50-寻路-3飞"
+    ],
+    "on_error": [
+      "夜航50-检测地图-前方3"
+    ]
+  },
+  "夜航50-检测地图-前方3": {
+    "recognition": "TemplateMatch",
+    "roi": [
+      156,
+      122,
+      967,
+      513
+    ],
+    "template": [
+      "night50map/前方3.png"
+    ],
+    "next": [
+      "夜航50-寻路-5飞"
+    ],
+    "on_error": [
+      "夜航50-寻路"
+    ]
+  },
+  "夜航50-寻路-3飞": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "MacroPlayer",
+    "custom_action_param": {
+      "file": "夜航手册50/夜航手册50-3飞.macro"
+    },
+    "post_delay": 0,
+    "focus": {
+      "Node.Action.Succeeded": "到达挂机点，开刷！",
+      "Node.Recognition.Starting": "(ง •̀_•́)ง 寻路中，马上就到！"
+    },
+    "next": [
+      "夜航50-超时计时开始"
+    ]
+  },
+  "夜航50-寻路-5飞": {
+    "pre_delay": 0,
+    "action": "Custom",
+    "custom_action": "MacroPlayer",
+    "custom_action_param": {
+      "file": "夜航手册50/夜航手册50-5飞.macro"
+    },
+    "post_delay": 0,
+    "focus": {
+      "Node.Action.Succeeded": "到达挂机点，开刷！",
+      "Node.Recognition.Starting": "(ง •̀_•́)ง 寻路中，马上就到！"
     },
     "next": [
       "夜航50-超时计时开始"
@@ -203,7 +307,7 @@
       "驱离"
     ],
     "next": [
-      "夜航50-寻路"
+      "夜航50-检测地图-侧转弯"
     ]
   },
   "夜航50-点击80": {
