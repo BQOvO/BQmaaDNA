@@ -1,160 +1,168 @@
 {
     "夜航-20": {
-        "recognition": "OCR",
-        "roi": [
-            434,
-            154,
-            33,
-            36
-        ],
-        "expected": [
-            "20"
-        ],
-        "action": "Click"
+      "recognition": "TemplateMatch",
+      "roi": [
+        423,
+        134,
+        56,
+        547
+      ],
+      "template": [
+        "nightlevel/20.png"
+      ],
+      "order_by": "Score",
+      "action": "Click"
     },
     "夜航-30": {
-        "recognition": "OCR",
-        "roi": [
-            433,
-            224,
-            34,
-            37
-        ],
-        "expected": [
-            "30"
-        ],
-        "action": "Click"
+      "recognition": "TemplateMatch",
+      "roi": [
+        423,
+        134,
+        56,
+        547
+      ],
+      "template": [
+        "nightlevel/30.png"
+      ],
+      "order_by": "Score",
+      "action": "Click"
     },
     "夜航-40": {
-        "recognition": "OCR",
-        "roi": [
-            433,
-            290,
-            35,
-            38
-        ],
-        "expected": [
-            "40"
-        ],
-        "action": "Click"
+      "recognition": "TemplateMatch",
+      "roi": [
+        423,
+        134,
+        56,
+        547
+      ],
+      "template": [
+        "nightlevel/40.png"
+      ],
+      "order_by": "Score",
+      "action": "Click"
     },
     "夜航-50": {
-        "recognition": "OCR",
-        "roi": [
-            433,
-            358,
-            36,
-            39
-        ],
-        "expected": [
-            "50"
-        ],
-        "action": "Click"
+      "recognition": "TemplateMatch",
+      "roi": [
+        423,
+        134,
+        56,
+        547
+      ],
+      "template": [
+        "nightlevel/50.png"
+      ],
+      "order_by": "Score",
+      "action": "Click"
     },
     "夜航-55": {
-        "recognition": "OCR",
-        "roi": [
-            432,
-            422,
-            37,
-            40
-        ],
-        "expected": [
-            "55"
-        ],
-        "action": "Click"
+      "recognition": "TemplateMatch",
+      "roi": [
+        423,
+        134,
+        56,
+        547
+      ],
+      "template": [
+        "nightlevel/55.png"
+      ],
+      "order_by": "Score",
+      "action": "Click"
     },
     "夜航-60": {
-        "recognition": "OCR",
-        "roi": [
-            430,
-            488,
-            38,
-            41
-        ],
-        "expected": [
-            "60"
-        ],
-        "action": "Click"
+      "recognition": "TemplateMatch",
+      "roi": [
+        423,
+        134,
+        56,
+        547
+      ],
+      "template": [
+        "nightlevel/60.png"
+      ],
+      "order_by": "Score",
+      "action": "Click"
     },
     "夜航-65": {
-        "recognition": "OCR",
-        "roi": [
-            430,
-            556,
-            38,
-            42
-        ],
-        "expected": [
-            "65"
-        ],
-        "action": "Click"
+      "recognition": "TemplateMatch",
+      "roi": [
+        423,
+        134,
+        56,
+        547
+      ],
+      "template": [
+        "nightlevel/65.png"
+      ],
+      "order_by": "Score",
+      "action": "Click"
     },
     "夜航-70": {
-        "recognition": "OCR",
-        "roi": [
-            430,
-            621,
-            39,
-            43
-        ],
-        "expected": [
-            "70"
-        ],
-        "action": "Click"
+      "recognition": "TemplateMatch",
+      "roi": [
+        423,
+        134,
+        56,
+        547
+      ],
+      "template": [
+        "nightlevel/70.png"
+      ],
+      "order_by": "Score",
+      "action": "Click"
     },
     "夜航-75": {
-        "recognition": "OCR",
-        "roi": [
-            428,
-            545,
-            45,
-            49
-        ],
-        "expected": [
-            "75"
-        ],
-        "action": "Click"
+      "recognition": "TemplateMatch",
+      "roi": [
+        423,
+        134,
+        56,
+        547
+      ],
+      "template": [
+        "nightlevel/75.png"
+      ],
+      "order_by": "Score",
+      "action": "Click"
     },
     "夜航-80": {
-        "recognition": "OCR",
-        "roi": [
-            431,
-            617,
-            40,
-            44
-        ],
-        "expected": [
-            "80"
-        ],
-        "action": "Click"
+      "recognition": "TemplateMatch",
+      "roi": [
+        423,
+        134,
+        56,
+        547
+      ],
+      "template": [
+        "nightlevel/80.png"
+      ],
+      "order_by": "Score",
+      "action": "Click"
     },
     "夜航-等级条上滑动": {
-        "recognition": "DirectHit",
-        "action": "Swipe",
-        "begin": [
-            450,
-            175
-        ],
-        "end": [
-            [
-                450,
-                575
-            ]
+      "action": "Swipe",
+      "begin": [
+        450,
+        175
+      ],
+      "end": [
+        [
+          450,
+          575
         ]
+      ]
     },
     "夜航-等级条下滑动": {
-        "recognition": "DirectHit",
-        "action": "Swipe",
-        "begin": [
-            450,
-            575
-        ],
-        "end": [
-            [
-                450,
-                175
-            ]
+      "action": "Swipe",
+      "begin": [
+        450,
+        575
+      ],
+      "end": [
+        [
+          450,
+          175
         ]
+      ]
     }
 }
